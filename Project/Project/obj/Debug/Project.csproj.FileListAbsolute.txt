@@ -1,0 +1,2 @@
+D:\Project\Project\bin\Debug\Project.exe.config
+D:\physical\Project\Project\bin\Debug\Project.exe.config
