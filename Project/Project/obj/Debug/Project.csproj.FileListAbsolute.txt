@@ -3,10 +3,10 @@ D:\physical\Project\Project\bin\Debug\Project.exe.config
 D:\physical\Project\Project\bin\Debug\Project.exe
 D:\physical\Project\Project\bin\Debug\Project.pdb
 D:\physical\Project\Project\obj\Debug\Project.csprojResolveAssemblyReference.cache
-D:\physical\Project\Project\obj\Debug\Project.Form1.resources
 D:\physical\Project\Project\obj\Debug\Project.Menu.resources
-D:\physical\Project\Project\obj\Debug\Project.Form3.resources
 D:\physical\Project\Project\obj\Debug\Project.Properties.Resources.resources
 D:\physical\Project\Project\obj\Debug\Project.csproj.GenerateResource.Cache
 D:\physical\Project\Project\obj\Debug\Project.exe
 D:\physical\Project\Project\obj\Debug\Project.pdb
+D:\physical\Project\Project\obj\Debug\Project.login.resources
+D:\physical\Project\Project\obj\Debug\Project.List.resources
