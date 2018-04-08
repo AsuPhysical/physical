@@ -1,6 +1,6 @@
 ﻿namespace Project
 {
-    partial class Form2
+    partial class Menu
     {
         /// <summary>
         /// Required designer variable.
