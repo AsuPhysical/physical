@@ -10,3 +10,5 @@ D:\physical\Project\Project\obj\Debug\Project.exe
 D:\physical\Project\Project\obj\Debug\Project.pdb
 D:\physical\Project\Project\obj\Debug\Project.login.resources
 D:\physical\Project\Project\obj\Debug\Project.List.resources
+D:\physical\Project\Project\obj\Debug\Project.NormDate.resources
+D:\physical\Project\Project\obj\Debug\Project.Statistics.resources

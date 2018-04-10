@@ -17,11 +17,12 @@ namespace Project
             InitializeComponent();
         }
 
-               
-
+        Menu menu;
         private void button1_Click(object sender, EventArgs e)
         {
-
+            menu = new Menu();
+            menu.Show();
+            this.Hide();
         }
     }
 }

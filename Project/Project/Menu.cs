@@ -16,6 +16,35 @@ namespace Project
         {
             InitializeComponent();
         }
+
+        List list;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            list = new List();
+            list.Show();
+            this.Hide();
+        }
+        Statistics statistics;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            statistics = new Statistics();
+            statistics.Show();
+            this.Hide();
+        }
+        NormDate normDate;
+        private void button3_Click(object sender, EventArgs e)
+        {
+            normDate = new NormDate();
+            normDate.Show();
+            this.Hide();
+        }
+        login loggin;
+        private void button4_Click(object sender, EventArgs e)
+        {
+            loggin = new login();
+            loggin.Show();
+            this.Hide();
+        }
     }
 
     public class Students
