@@ -24,14 +24,14 @@ namespace Project
         {
             ORACLE.Open();
             oraAdap.SelectCommand = new OracleCommand();
-            oraAdap.SelectCommand.CommandText = "Select * from DICTIONARY_GROUPS";
+            oraAdap.SelectCommand.CommandText = "Select * from test_view ";
             oraAdap.SelectCommand.Connection = ORACLE;
             OracleDataReader oraReader = oraAdap.SelectCommand.ExecuteReader();
             while (oraReader.Read())
             {
                 object[] values = new object[oraReader.FieldCount];
                 oraReader.GetValues(values);
-                listBox1.Items.Add(values[1].ToString());
+                listBox1.Items.Add(values[5].ToString());
                 //MessageBox.Show(values[1].ToString()); 
             }
         }
@@ -39,6 +39,12 @@ namespace Project
         private void List_Load(object sender, EventArgs e)
         {
             Load_List();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            (new Menu()).Show();
+            this.Hide();
         }
     }
 }
