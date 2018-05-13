@@ -55,17 +55,16 @@ namespace Project
 
         private void login_Load(object sender, EventArgs e)
         {
-            textBox.Text = "123";
             ORACLE.Open();
             oraAdap.SelectCommand = new OracleCommand();
-            oraAdap.SelectCommand.CommandText = "Select * from test_view ";
+            oraAdap.SelectCommand.CommandText = "Select * from sp_teachers ";
             oraAdap.SelectCommand.Connection = ORACLE;
             OracleDataReader oraReader = oraAdap.SelectCommand.ExecuteReader();
             while (oraReader.Read())
             {
                 object[] values = new object[oraReader.FieldCount];
                 oraReader.GetValues(values);
-                source.Add(values[5].ToString() );
+                source.Add(values[1].ToString() );
             }
             textBox.AutoCompleteCustomSource = source;
 
