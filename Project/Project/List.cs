@@ -20,6 +20,8 @@ namespace Project
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
+        DataSet ds = new DataSet();
+
         private void Load_List()
         {
             ORACLE.Open();
@@ -32,7 +34,6 @@ namespace Project
                 object[] values = new object[oraReader.FieldCount];
                 oraReader.GetValues(values);
                 listBox1.Items.Add(values[5].ToString());
-                //MessageBox.Show(values[1].ToString()); 
             }
         }
 
@@ -45,6 +46,23 @@ namespace Project
         {
             (new Menu()).Show();
             this.Hide();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Update_Load();
+        }
+        private void Update_Load()
+        {
+            string group = "";
+            if (listBox1.SelectedItems.Count > 0)
+            {
+                group = listBox1.SelectedItems[0].ToString();
+            }
+            oraAdap.SelectCommand.CommandText = "Select * from test_view "; ////////////
+            DataTable data = new DataTable();
+            oraAdap.Fill(data);
+            dataGridView2.DataSource = data;
         }
     }
 }
