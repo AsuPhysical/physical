@@ -65,6 +65,12 @@ namespace Project
             DataTable data = new DataTable();
             oraAdap.Fill(data);
             dataGridView2.DataSource = data;
+            DataGridViewTextBoxColumn dgvAge;
+            dgvAge = new DataGridViewTextBoxColumn();
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Балл", HeaderText = "БАЛЛ", Width = 100 });
+            //dataGridView2.Columns.Add();
+            //dataGridView2.Columns[dataGridView2.Columns.Count].V;
+           
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -105,15 +111,33 @@ namespace Project
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //int n, nrow, sum = 0;
+            //Double result, result1;
+            //String s;
+            //nrow = dataGridView2.Columns.Count;
+            //for (int i = 0; i < nrow; i++)
+            //{
+            //    s = dataGridView2.Rows[i].Cells[3].Value.ToString();
+            //    n = int.Parse(s);
+            //    sum += n;
+            //    result = sum;
+            //    result1 = Math.Round(result / 3, 2);
+            //    datagridView2.Rows[i].Cells[6].Value = result1;
 
+            //}
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
-            OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);   
-            oraAdap.UpdateCommand = builder.GetUpdateCommand();
+            //OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);   
+            //oraAdap.UpdateCommand = builder.GetUpdateCommand();
+            //DataTable data = new DataTable();
+            //dataGridView2.DataSource = data;
+
             DataTable data = new DataTable();
+            oraAdap.Fill(data);
+            //data.TableName  = dataGridView2.DataSource;
             oraAdap.Update(data);
             MessageBox.Show("Данные сохранены");
         }

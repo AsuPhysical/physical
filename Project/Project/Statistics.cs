@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,11 @@ namespace Project
         {
             InitializeComponent();
         }
+
+        OracleConnection ORACLE = new OracleConnection(constr);
+        static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
+        OracleDataAdapter oraAdap = new OracleDataAdapter();
+        DataSet ds = new DataSet();
 
         private void button2_Click(object sender, EventArgs e)
         {
