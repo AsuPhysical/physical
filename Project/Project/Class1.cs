@@ -8,7 +8,7 @@ namespace Project
 {
     class Class1
     {
-        public static string Teachr_fio = " ";
+        public static string Teachr_fio;
     }
     
 }

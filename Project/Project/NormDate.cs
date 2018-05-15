@@ -57,7 +57,17 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //oraAdap.SelectCommand.CommandText = "Select * from DATE_NORMATIVE";
+            //DataTable data = dataGridView2.DataSource as DataTable;
+            //OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);
+            //oraAdap.Update(data);
+           // MessageBox.Show(dateTimePicker1);
 
+            ////ГРУППЫ ПРИВЯЗАТЬ К ПРЕПОДУ
+
+            oraAdap.InsertCommand.CommandText= 
+           "INSERT INTO DATE_NORMATIVE (ID_NORMATIVE, DATE_NORMATIVE, ID_GROUP) values ((Select ID_NORMATIVE from  SP_NORMATIVE where TITLE_NORMATIVE= '"+ comboBox1.Text+
+           "'), "+ dateTimePicker1.Text +" , (select ID from SP_PHYSICAL_GROUP where TITLE= '"+comboBox2.Text +"'))";
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)

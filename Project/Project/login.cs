@@ -20,7 +20,8 @@ namespace Project
         {
             InitializeComponent();
             {
-                
+
+                //MessageBox.Show(Class1.Teachr_fio);
             }
 
         }
@@ -51,6 +52,7 @@ namespace Project
                 {
                     (new Menu()).Show();
                     this.Hide();
+                    Class1.Teachr_fio = textBox.Text.Trim();
                     ORACLE.Close();
                 }
                 else { MessageBox.Show("Неверно ввели данные"); }

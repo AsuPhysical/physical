@@ -27,14 +27,16 @@ namespace Project
         {
             ORACLE.Open();
             oraAdap.SelectCommand = new OracleCommand();
-            oraAdap.SelectCommand.CommandText = "Select * from SP_ST_GROUP ";
+            //oraAdap.SelectCommand.CommandText = "Select * from SP_ST_GROUP ";
+            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio + "'";
+
             oraAdap.SelectCommand.Connection = ORACLE;
             OracleDataReader oraReader = oraAdap.SelectCommand.ExecuteReader();
             while (oraReader.Read())
             {
                 object[] values = new object[oraReader.FieldCount];
                 oraReader.GetValues(values);
-                listBox1.Items.Add(values[1].ToString());
+                listBox1.Items.Add(values[0].ToString());
             }
         }
 
@@ -65,8 +67,8 @@ namespace Project
             {
                 group = listBox1.SelectedItems[0].ToString();
             }
-            //oraAdap.SelectCommand.CommandText = "Select K_ST, SP_PHYSICAL_GROUP.TITLE as Группа_здоровья, stfam as Фамилия, stname as Имя, stot as Отчество from SP_PHYSICAL_GROUP, ST_ANK1, SP_ST_GROUP where SP_PHYSICAL_GROUP.Id=ST_ANK1.PHYSICAL_ID and ST_ANK1.group_id = SP_ST_GROUP.id and SP_ST_GROUP.title = '" + group + "'";
-            oraAdap.SelectCommand.CommandText = "select id_group from TEACH_GROUP, SP_TEACHERS where SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and FIO ='" + Teachr_fio + "'";
+            oraAdap.SelectCommand.CommandText = "Select K_ST, SP_PHYSICAL_GROUP.TITLE as Группа_здоровья, stfam as Фамилия, stname as Имя, stot as Отчество from SP_PHYSICAL_GROUP, ST_ANK1, SP_ST_GROUP where SP_PHYSICAL_GROUP.Id=ST_ANK1.PHYSICAL_ID and ST_ANK1.group_id = SP_ST_GROUP.id and SP_ST_GROUP.title = '" + group + "'";
+            //oraAdap.SelectCommand.CommandText = "select id_group from TEACH_GROUP, SP_TEACHERS where SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and FIO ='" + Class1.Teachr_fio + "'";
             DataTable data = new DataTable();
             oraAdap.Fill(data);
             dataGridView2.DataSource = data;
