@@ -31,3 +31,6 @@ D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Projec
 D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Properties.Resources.resources
 D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Statistics.resources
 D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.csproj.GenerateResource.Cache
+D:\учеба\physical\Project\Project\bin\Debug\Project.exe.config
+D:\учеба\physical\Project\Project\obj\Debug\Project.exe
+D:\учеба\physical\Project\Project\obj\Debug\Project.pdb
