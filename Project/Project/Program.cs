@@ -16,7 +16,7 @@ namespace Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NormDate());
+            Application.Run(new List());
         }
     }
 }
