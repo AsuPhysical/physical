@@ -17,8 +17,6 @@ namespace Project
         public List()
         {
             InitializeComponent();
-           
-            
         }
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
@@ -54,48 +52,26 @@ namespace Project
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.dataGridView2.Rows.Clear();  // удаление всех строк 
-            int count = this.dataGridView2.Columns.Count; for (int i = 0; i < count; i++)     // цикл удаления всех столбцов 
+
+            int count = this.dataGridView2.Columns.Count; for (int i = 0; i < count; i++)   // цикл удаления всех столбцов 
             { this.dataGridView2.Columns.RemoveAt(0); }
             Update_Load();
             dataGridView2.Columns.Add(new DataGridViewTextBoxColumn() { Name = "БАЛЛ", HeaderText = "БАЛЛ", Width = 100 });
         }
         private void Update_Load()
         {
-            //dataGridView2   = null;
-           // dataGridView2.DataBindings.Clear();
             string group = "";
             if (listBox1.SelectedItems.Count > 0)
             {
                 group = listBox1.SelectedItems[0].ToString();
             }
-            oraAdap.SelectCommand.CommandText = "Select K_ST, SP_PHYSICAL_GROUP.TITLE as Группа_здоровья, stfam as Фамилия, stname as Имя, stot as Отчество from SP_PHYSICAL_GROUP, ST_ANK1, SP_ST_GROUP where SP_PHYSICAL_GROUP.Id=ST_ANK1.PHYSICAL_ID and ST_ANK1.group_id = SP_ST_GROUP.id and SP_ST_GROUP.title = '" + group + "'";
-            //oraAdap.SelectCommand.CommandText = "SElect * from Journal";
+            //oraAdap.SelectCommand.CommandText = "Select K_ST, SP_PHYSICAL_GROUP.TITLE as Группа_здоровья, stfam as Фамилия, stname as Имя, stot as Отчество from SP_PHYSICAL_GROUP, ST_ANK1, SP_ST_GROUP where SP_PHYSICAL_GROUP.Id=ST_ANK1.PHYSICAL_ID and ST_ANK1.group_id = SP_ST_GROUP.id and SP_ST_GROUP.title = '" + group + "'";
+            oraAdap.SelectCommand.CommandText = "select id_group from TEACH_GROUP, SP_TEACHERS where SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and FIO ='" + Teachr_fio + "'";
             DataTable data = new DataTable();
             oraAdap.Fill(data);
             dataGridView2.DataSource = data;
             DataGridViewTextBoxColumn dgvAge;
             dgvAge = new DataGridViewTextBoxColumn();
-
-            
-            
-
-            int index;
-            //index = dataGridView2.Columns["БАЛЛ"].Index;
-            
-            //index = dataGridView2.Columns["БАЛЛ"].Index;
-
-            //if (dataGridView2.Columns.Count-2 == index)
-            //{
-            //    dataGridView2.Columns.Remove("БАЛЛ");
-            //    MessageBox.Show("!!!!!!!!!!");
-            //}
-
-           // dataGridView2.Columns.Add(new DataGridViewTextBoxColumn() { Name = "БАЛЛ", HeaderText = "БАЛЛ", Width = 100 });
-            //if (dataGridView2.Columns[dataGridView2.Columns.Count - 1].Name == dataGridView2.Columns[dataGridView2.Columns.Count - 2].Name && dataGridView2.Columns[dataGridView2.Columns.Count - 1].Name == "БАЛЛ") dataGridView2.Columns.Remove(dataGridView2.Columns[dataGridView2.Columns.Count - 1]);
-            //dataGridView2.Columns.Add();
-            //dataGridView2.Columns[dataGridView2.Columns.Count].V;
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

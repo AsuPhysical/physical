@@ -9,13 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 
+
+
 namespace Project
 {
     public partial class login : Form
     {
+
         public login()
         {
             InitializeComponent();
+            {
+                
+            }
+
         }
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";

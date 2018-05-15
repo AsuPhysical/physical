@@ -16,6 +16,7 @@ namespace Project
         public Statistics()
         {
             InitializeComponent();
+            chart1.Series[0].LegendText = " ";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);
@@ -27,6 +28,13 @@ namespace Project
         {
             (new Menu()).Show();
             this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            chart1.Series[0].Points.Clear();
+            chart1.Series[0].LegendText = "ИТ";
+
         }
     }
 }
