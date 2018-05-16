@@ -21,7 +21,6 @@ namespace Project
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
-        DataSet ds = new DataSet();
 
         private void Load_List()
         {

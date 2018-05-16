@@ -21,7 +21,7 @@ namespace Project
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
-        DataSet ds = new DataSet();
+        string month = DateTime.Now.ToString("MM");
 
         private void Load_List()
         {
@@ -54,7 +54,6 @@ namespace Project
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             int count = this.dataGridView2.Columns.Count; for (int i = 0; i < count; i++)   // цикл удаления всех столбцов 
             { this.dataGridView2.Columns.RemoveAt(0); }
             Update_Load();
@@ -67,8 +66,11 @@ namespace Project
             {
                 group = listBox1.SelectedItems[0].ToString();
             }
-            oraAdap.SelectCommand.CommandText = "Select K_ST, SP_PHYSICAL_GROUP.TITLE as Группа_здоровья, stfam as Фамилия, stname as Имя, stot as Отчество from SP_PHYSICAL_GROUP, ST_ANK1, SP_ST_GROUP where SP_PHYSICAL_GROUP.Id=ST_ANK1.PHYSICAL_ID and ST_ANK1.group_id = SP_ST_GROUP.id and SP_ST_GROUP.title = '" + group + "'";
-            //oraAdap.SelectCommand.CommandText = "select id_group from TEACH_GROUP, SP_TEACHERS where SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and FIO ='" + Class1.Teachr_fio + "'";
+            //oraAdap.SelectCommand.CommandText = "Select K_ST, SP_PHYSICAL_GROUP.TITLE as Группа_здоровья, stfam as Фамилия, stname as Имя, stot as Отчество from " +
+            //   "SP_PHYSICAL_GROUP, ST_ANK1, SP_ST_GROUP where SP_PHYSICAL_GROUP.Id=ST_ANK1.PHYSICAL_ID and ST_ANK1.group_id = SP_ST_GROUP.id and SP_ST_GROUP.title = '" + group + "'";
+            oraAdap.SelectCommand.CommandText = "Select * from journal where Substr(DATE_LESSON,4,2) = '"+ month + "'";
+            
+
             DataTable data = new DataTable();
             oraAdap.Fill(data);
             dataGridView2.DataSource = data;
@@ -106,10 +108,8 @@ namespace Project
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            oraAdap.SelectCommand.CommandText = "Select * from test_view where " + comboBox1.Text; ////////////
-            DataTable data = new DataTable();
-            oraAdap.Fill(data);
-            dataGridView2.DataSource = data;
+            month = Convert.ToDateTime(comboBox1.Text + "/01/2000").ToString("MM");
+            Update_Load();
         }
 
         private void button1_Click(object sender, EventArgs e)
