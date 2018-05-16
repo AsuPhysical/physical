@@ -57,19 +57,15 @@ namespace Project
                 arrX.Add(odr.GetInt32(0));
             }
 
-            OracleCommand oc1 = new OracleCommand(stat2, ORACLE);
-            OracleDataReader odr1 = oc1.ExecuteReader();
-            while (odr1.Read())
+            oc = new OracleCommand(stat2, ORACLE);
+            odr = oc.ExecuteReader();
+            while (odr.Read())
             {
-                arrY.Add(odr1.GetString(0));
+                arrY.Add(odr.GetString(0));
             }
 
 
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
-
-            
-
-
 
         }
 
