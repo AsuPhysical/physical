@@ -48,22 +48,21 @@ namespace Project
             chart1.Series[0].Points.Clear();
             //chart1.Series[0].LegendText = comboBox2.Text;
 
-            List<string> arrX = new List<string>();
+            List<int> arrX = new List<int>();
             List<string> arrY = new List<string>();
 
             //// Статистика по определенному нормативу, за определенный год ВСЕХ ИЛИ Одной группы
 
-            string stat1 = "select STFAM from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.GROUP_ID";
+            string stat1 = "select Count(STFAM) from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.GROUP_ID group by SP_PHYSICAL_GROUP.TITLE";
 
-            string stat2 = "select SP_PHYSICAL_GROUP.TITLE from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.GROUP_ID";
+            string stat2 = "select SP_PHYSICAL_GROUP.TITLE from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.GROUP_ID group by SP_PHYSICAL_GROUP.TITLE";
 
 
             OracleCommand oc = new OracleCommand(stat1, ORACLE);
             OracleDataReader odr = oc.ExecuteReader();
-            //MessageBox.Show(odr.GetInt32(0).ToString);
             while (odr.Read())
             {
-                arrX.Add(odr.GetString(0));
+                arrX.Add(odr.GetInt32(0));
             }
 
             oc = new OracleCommand(stat2, ORACLE);
@@ -72,9 +71,14 @@ namespace Project
             {
                 arrY.Add(odr.GetString(0));
             }
-
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            (new Menu()).Show();
+            this.Hide();
         }
     }
 }
