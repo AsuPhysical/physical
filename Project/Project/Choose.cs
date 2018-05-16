@@ -34,11 +34,16 @@ namespace Project
                 (new Stat_student()).Show();
                 this.Hide();
             }
-            //if (comboBox1.Text == "3")
-            //{
-            //    (new Statistics()).Show();
-            //    this.Hide();
-            //}
+            if (comboBox1.Text == "3")
+            {
+                (new Stat_section()).Show();
+                this.Hide();
+            }
+            if (comboBox1.Text == "4")
+            {
+                (new Stat_group()).Show();
+                this.Hide();
+            }
 
         }
 
@@ -69,11 +74,13 @@ namespace Project
             odr = oc.ExecuteReader();
             while (odr.Read())
             {
-                arrY.Add(odr.GetString(0));
+                arrY.Add(odr.GetString(0).Trim());
             }
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
 
         }
+
+
 
         private void button2_Click(object sender, EventArgs e)
         {

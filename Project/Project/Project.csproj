@@ -71,6 +71,24 @@
     <Compile Include="Choose.Designer.cs">
       <DependentUpon>Choose.cs</DependentUpon>
     </Compile>
+    <Compile Include="LFK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LFK.Designer.cs">
+      <DependentUpon>LFK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stat_group.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stat_group.Designer.cs">
+      <DependentUpon>Stat_group.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stat_section.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stat_section.Designer.cs">
+      <DependentUpon>Stat_section.cs</DependentUpon>
+    </Compile>
     <Compile Include="Stat_student.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +129,15 @@
     </Compile>
     <EmbeddedResource Include="Choose.resx">
       <DependentUpon>Choose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LFK.resx">
+      <DependentUpon>LFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stat_group.resx">
+      <DependentUpon>Stat_group.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stat_section.resx">
+      <DependentUpon>Stat_section.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stat_student.resx">
       <DependentUpon>Stat_student.cs</DependentUpon>

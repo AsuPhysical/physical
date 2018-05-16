@@ -54,3 +54,6 @@ D:\учеба\physical\Project\Project\obj\Debug\Project.NormDate.resources
 D:\учеба\physical\Project\Project\obj\Debug\Project.Properties.Resources.resources
 D:\учеба\physical\Project\Project\obj\Debug\Project.Statistics.resources
 D:\учеба\physical\Project\Project\obj\Debug\Project.csproj.GenerateResource.Cache
+D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Stat_section.resources
+D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.LFK.resources
+D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Stat_group.resources

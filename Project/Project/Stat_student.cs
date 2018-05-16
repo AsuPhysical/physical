@@ -118,5 +118,10 @@ namespace Project
                 comboBox1.Items.Add(values[0].ToString());
             }
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
