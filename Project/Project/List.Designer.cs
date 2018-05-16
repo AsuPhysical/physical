@@ -77,7 +77,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(296, 436);
+            this.button1.Location = new System.Drawing.Point(296, 443);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(197, 52);
@@ -92,7 +92,7 @@
             this.button2.Location = new System.Drawing.Point(296, 369);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(197, 47);
+            this.button2.Size = new System.Drawing.Size(197, 59);
             this.button2.TabIndex = 5;
             this.button2.Text = "Сохранить изменения";
             this.button2.UseVisualStyleBackColor = true;
@@ -169,9 +169,9 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(1315, 28);
+            this.button5.Location = new System.Drawing.Point(1315, 25);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(111, 31);
+            this.button5.Size = new System.Drawing.Size(111, 34);
             this.button5.TabIndex = 13;
             this.button5.Text = "Меню";
             this.button5.UseVisualStyleBackColor = true;

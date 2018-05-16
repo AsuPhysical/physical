@@ -18,7 +18,7 @@ namespace Project
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Stat_student());
+            Application.Run(new Stat_group());
         }
     }
 }

@@ -52,16 +52,18 @@
             this.button6.TabIndex = 26;
             this.button6.Text = "Поиск";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(1330, 40);
+            this.button5.Location = new System.Drawing.Point(1330, 38);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(111, 31);
+            this.button5.Size = new System.Drawing.Size(111, 33);
             this.button5.TabIndex = 25;
             this.button5.Text = "Меню";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // listBox1
             // 
@@ -72,6 +74,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(236, 466);
             this.listBox1.TabIndex = 24;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -134,21 +137,23 @@
             this.button2.Location = new System.Drawing.Point(311, 381);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(197, 47);
+            this.button2.Size = new System.Drawing.Size(197, 59);
             this.button2.TabIndex = 19;
             this.button2.Text = "Сохранить изменения";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(311, 448);
+            this.button1.Location = new System.Drawing.Point(311, 451);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(197, 52);
             this.button1.TabIndex = 18;
             this.button1.Text = "Расчитать итоговый балл";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -200,6 +205,7 @@
             this.Controls.Add(this.label1);
             this.Name = "LFK";
             this.Text = "LFK";
+            this.Load += new System.EventHandler(this.LFK_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Project
 {
@@ -16,6 +17,7 @@ namespace Project
         public Stat_group()
         {
             InitializeComponent();
+            Class1.Teachr_fio = "Могутов Мир Платонович ";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);
@@ -25,6 +27,8 @@ namespace Project
         private void button1_Click(object sender, EventArgs e)
         {
             chart1.Series[0].Points.Clear();
+            //chart1.Series[0].ToolTip = "X = #VALX, Y = #VALY";
+            chart1.GetToolTipText += chart1_GetToolTipText;
             //chart1.Series[0].LegendText = comboBox2.Text;
 
             List<double> arrX = new List<double>();
@@ -39,7 +43,7 @@ namespace Project
                "SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and SUBSTR(SP_ST_GROUP.TITLE, 4, 1) = '" + comboBox1.Text + "' and " +
                "TEACH_GROUP.ID_GROUP = st_ank1.GROUP_ID and SP_TEACHERS.ID_TEACHER = TEACH_GROUP.ID_TEACH and SP_TEACHERS.FIO = '" + Class1.Teachr_fio + "'";
 
-                stat2 = "select STFAM||' '||STNAME||' '||STOT as FIO from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP, TEACH_GROUP, SP_TEACHERS " +
+                stat2 = "select STFAM as FIO from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP, TEACH_GROUP, SP_TEACHERS " +
                " where journal.DATE_LESSON = date_normative.DATE_NORMATIVE and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and  " +
                "SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and SUBSTR(SP_ST_GROUP.TITLE, 4, 1) = '" + comboBox1.Text + "' and " +
                "TEACH_GROUP.ID_GROUP = st_ank1.GROUP_ID and SP_TEACHERS.ID_TEACHER = TEACH_GROUP.ID_TEACH and SP_TEACHERS.FIO = '" + Class1.Teachr_fio + "'";
@@ -51,7 +55,7 @@ namespace Project
                 "st_ank1.K_ST = journal.ID_STUDENT and SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and " +
                 "SUBSTR(SP_ST_GROUP.TITLE, 4, 1) = '" + comboBox1.Text + "'";
 
-                stat2 = "select STFAM||' '||STNAME||' '||STOT as FIO from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP where " +
+                stat2 = "select STFAM as FIO from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP where " +
                "journal.DATE_LESSON = date_normative.DATE_NORMATIVE and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and " +
                " st_ank1.K_ST = journal.ID_STUDENT and SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and " +
                "SUBSTR(SP_ST_GROUP.TITLE, 4, 1) = '" + comboBox1.Text + "'";
@@ -71,6 +75,7 @@ namespace Project
                 arrY.Add(odr.GetString(0));
             }
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -104,5 +109,12 @@ namespace Project
         {
             Load_List();
         }
+
+        private void chart1_GetToolTipText(object sender, System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs e)
+        {
+            chart1.Series[0].ToolTip = "X = #VAL, Y = #VALY";
+
+        }
+
     }
 }

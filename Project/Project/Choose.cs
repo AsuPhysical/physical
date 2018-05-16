@@ -58,9 +58,9 @@ namespace Project
 
             //// Статистика по определенному нормативу, за определенный год ВСЕХ ИЛИ Одной группы
 
-            string stat1 = "select Count(STFAM) from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.GROUP_ID group by SP_PHYSICAL_GROUP.TITLE";
+            string stat1 = "select Count(STFAM) from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.PHYSICAL_ID group by SP_PHYSICAL_GROUP.TITLE";
 
-            string stat2 = "select SP_PHYSICAL_GROUP.TITLE from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.GROUP_ID group by SP_PHYSICAL_GROUP.TITLE";
+            string stat2 = "select SP_PHYSICAL_GROUP.TITLE from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.PHYSICAL_ID group by SP_PHYSICAL_GROUP.TITLE";
 
 
             OracleCommand oc = new OracleCommand(stat1, ORACLE);

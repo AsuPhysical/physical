@@ -50,6 +50,12 @@ namespace Project
         {
             Application.Exit();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            (new LFK()).Show();
+            this.Hide();
+        }
     }
 
     //public class Students

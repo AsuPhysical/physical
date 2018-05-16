@@ -69,6 +69,7 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownWidth = 250;
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(29, 156);
@@ -80,6 +81,7 @@
             // 
             // comboBox3
             // 
+            this.comboBox3.DropDownWidth = 700;
             this.comboBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.IntegralHeight = false;
@@ -140,6 +142,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownWidth = 250;
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(29, 243);

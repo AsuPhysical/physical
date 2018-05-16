@@ -18,6 +18,7 @@ namespace Project
         {
             InitializeComponent();
         }
+
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
@@ -54,7 +55,7 @@ namespace Project
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int count = this.dataGridView2.Columns.Count; for (int i = 0; i < count; i++)   // цикл удаления всех столбцов 
+            int count = this.dataGridView2.Columns.Count; for (int i = 0; i < count; i++) // цикл удаления всех столбцов 
             { this.dataGridView2.Columns.RemoveAt(0); }
             Update_Load();
             dataGridView2.Columns.Add(new DataGridViewTextBoxColumn() { Name = "БАЛЛ", HeaderText = "БАЛЛ", Width = 100 });
@@ -66,8 +67,6 @@ namespace Project
             {
                 group = listBox1.SelectedItems[0].ToString();
             }
-            //oraAdap.SelectCommand.CommandText = "Select K_ST, SP_PHYSICAL_GROUP.TITLE as Группа_здоровья, stfam as Фамилия, stname as Имя, stot as Отчество from " +
-            //   "SP_PHYSICAL_GROUP, ST_ANK1, SP_ST_GROUP where SP_PHYSICAL_GROUP.Id=ST_ANK1.PHYSICAL_ID and ST_ANK1.group_id = SP_ST_GROUP.id and SP_ST_GROUP.title = '" + group + "'";
             oraAdap.SelectCommand.CommandText = "Select * from journal where Substr(DATE_LESSON,4,2) = '"+ month + "'";
             
 
@@ -132,9 +131,18 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DataTable data = dataGridView2.DataSource as DataTable;
-            OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);
-            oraAdap.Update(data);
+            try
+            {
+                DataTable data = dataGridView2.DataSource as DataTable;
+                OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);
+                oraAdap.Update(data);
+                MessageBox.Show("Данные сохранены");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при вводе данных");
+            }
+            
         }
     }
 }
