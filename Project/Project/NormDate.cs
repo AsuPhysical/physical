@@ -27,14 +27,14 @@ namespace Project
         {
             ORACLE.Open();
             oraAdap.SelectCommand = new OracleCommand();
-            oraAdap.SelectCommand.CommandText = "Select * from SP_ST_GROUP ";
+            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio + "'";
             oraAdap.SelectCommand.Connection = ORACLE;
             OracleDataReader oraReader = oraAdap.SelectCommand.ExecuteReader();
             while (oraReader.Read())
             {
                 object[] values = new object[oraReader.FieldCount];
                 oraReader.GetValues(values);
-                comboBox2.Items.Add(values[1].ToString());
+                comboBox2.Items.Add(values[0].ToString());
             }
 
             oraAdap.SelectCommand = new OracleCommand();
@@ -57,17 +57,18 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //oraAdap.SelectCommand.CommandText = "Select * from DATE_NORMATIVE";
-            //DataTable data = dataGridView2.DataSource as DataTable;
-            //OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);
-            //oraAdap.Update(data);
-           // MessageBox.Show(dateTimePicker1);
-
-            ////ГРУППЫ ПРИВЯЗАТЬ К ПРЕПОДУ
-
-            oraAdap.InsertCommand.CommandText= 
-           "INSERT INTO DATE_NORMATIVE (ID_NORMATIVE, DATE_NORMATIVE, ID_GROUP) values ((Select ID_NORMATIVE from  SP_NORMATIVE where TITLE_NORMATIVE= '"+ comboBox1.Text+
-           "'), "+ dateTimePicker1.Text +" , (select ID from SP_PHYSICAL_GROUP where TITLE= '"+comboBox2.Text +"'))";
+            try
+            {
+                string query = "INSERT INTO DATE_NORMATIVE (ID_NORMATIVE, DATE_NORMATIVE, ID_GROUP) values ((Select ID_NORMATIVE from  SP_NORMATIVE where TITLE_NORMATIVE= '" + comboBox1.Text +
+               "'), '" + dateTimePicker1.Text + "' , (select ID from SP_ST_GROUP where TITLE= '" + comboBox2.Text + "'))";
+                oraAdap.InsertCommand = new OracleCommand(query, ORACLE);
+                oraAdap.InsertCommand.ExecuteNonQuery();
+                MessageBox.Show("Норматив добавлен");
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось добавить дату сдачи норматива");
+            }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
