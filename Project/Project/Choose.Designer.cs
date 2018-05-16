@@ -1,6 +1,6 @@
 ﻿namespace Project
 {
-    partial class Form1
+    partial class Choose
     {
         /// <summary>
         /// Required designer variable.
@@ -48,9 +48,9 @@
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Сравнение с кружками и  без кружков",
-            "Физ-данных За время обучения опр студента  СВОИХ",
-            "Физ-данных За время обучения опр студента  ВСЕХ"});
+            "1",
+            "2",
+            "3"});
             this.comboBox1.Location = new System.Drawing.Point(60, 139);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
@@ -60,14 +60,15 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(119, 229);
+            this.button1.Location = new System.Drawing.Point(60, 216);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 36);
+            this.button1.Size = new System.Drawing.Size(265, 41);
             this.button1.TabIndex = 13;
             this.button1.Text = "Выбрать";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // Choose
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -75,7 +76,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox1);
-            this.Name = "Form1";
+            this.Name = "Choose";
             this.Text = "Выбор статистики";
             this.ResumeLayout(false);
             this.PerformLayout();

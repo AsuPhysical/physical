@@ -17,7 +17,6 @@ namespace Project
         {
             InitializeComponent();
             chart1.Series[0].LegendText = " ";
-            Class1.Teachr_fio = "Могутов Мир Платонович";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);
@@ -98,6 +97,12 @@ namespace Project
         private void Statistics_Load(object sender, EventArgs e)
         {
             Load_List();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            (new Choose()).Show();
+            this.Hide();
         }
     }
 }

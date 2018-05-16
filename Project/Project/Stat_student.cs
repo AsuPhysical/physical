@@ -16,6 +16,7 @@ namespace Project
         public Stat_student()
         {
             InitializeComponent();
+            Class1.Teachr_fio = "Могутов Мир Платонович";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);
@@ -32,16 +33,19 @@ namespace Project
 
             //// Статистика по определенному нормативу, за определенный год ВСЕХ ИЛИ Одной группы
 
-            string stat1 = "select value_norm from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP where journal.DATE_LESSON = date_normative.DATE_NORMATIVE " +
-            "and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and " +
-            "SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and SP_ST_GROUP.TITLE = '" + comboBox2.Text + "'";
+            string stat1 = "select value_norm from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE"+
+            " and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and"+
+            " SP_NORMATIVE.TITLE_NORMATIVE = '"+comboBox3.Text+"' and st_ank1.STFAM || ' ' || STNAME || ' ' || STOT = '"+comboBox1.Text+"'";
 
-            string stat2 = "select stfam from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP where journal.DATE_LESSON = date_normative.DATE_NORMATIVE " +
-            "and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and " +
-            "SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and SP_ST_GROUP.TITLE = '" + comboBox2.Text + "'";
+            string stat2 = "select journal.date_lesson from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE" +
+            " and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and" +
+            " SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and st_ank1.STFAM || ' ' || STNAME || ' ' || STOT = '" + comboBox1.Text + "'"; 
+
+
 
             OracleCommand oc = new OracleCommand(stat1, ORACLE);
             OracleDataReader odr = oc.ExecuteReader();
+            //MessageBox.Show(odr.GetInt32(0).ToString);
             while (odr.Read())
             {
                 arrX.Add(odr.GetInt32(0));
@@ -51,7 +55,7 @@ namespace Project
             odr = oc.ExecuteReader();
             while (odr.Read())
             {
-                arrY.Add(odr.GetString(0));
+                arrY.Add(odr.GetDateTime(0).ToShortDateString());
             }
 
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
@@ -92,6 +96,27 @@ namespace Project
         private void Stat_student_Load(object sender, EventArgs e)
         {
             Load_List();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            (new Choose()).Show();
+            this.Hide();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox1.Items.Clear();
+            oraAdap.SelectCommand = new OracleCommand();
+            oraAdap.SelectCommand.CommandText = "select STFAM||' '||STNAME||' '||STOT as FIO from st_ank1, SP_ST_GROUP where SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_ST_GROUP.TITLE = '"+comboBox2.Text+"' ";
+            oraAdap.SelectCommand.Connection = ORACLE;
+            OracleDataReader oraReader1 = oraAdap.SelectCommand.ExecuteReader();
+            while (oraReader1.Read())
+            {
+                object[] values = new object[oraReader1.FieldCount];
+                oraReader1.GetValues(values);
+                comboBox1.Items.Add(values[0].ToString());
+            }
         }
     }
 }

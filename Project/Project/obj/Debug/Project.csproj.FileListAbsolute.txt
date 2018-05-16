@@ -34,4 +34,5 @@ D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Projec
 D:\учеба\physical\Project\Project\bin\Debug\Project.exe.config
 D:\учеба\physical\Project\Project\obj\Debug\Project.exe
 D:\учеба\physical\Project\Project\obj\Debug\Project.pdb
-D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Form1.resources
+D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Choose.resources
+D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Stat_student.resources

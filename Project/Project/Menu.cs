@@ -24,10 +24,10 @@ namespace Project
             list.Show();
             this.Hide();
         }
-        Statistics statistics;
+        Choose statistics;
         private void button2_Click(object sender, EventArgs e)
         {
-            statistics = new Statistics();
+            statistics = new Choose();
             statistics.Show();
             this.Hide();
         }
