@@ -57,3 +57,6 @@ D:\учеба\physical\Project\Project\obj\Debug\Project.csproj.GenerateResource
 D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Stat_section.resources
 D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.LFK.resources
 D:\Даша\3\2\Физкультура\physical\Project\Project\obj\Debug\Project.Stat_group.resources
+D:\учеба\physical\Project\Project\obj\Debug\Project.LFK.resources
+D:\учеба\physical\Project\Project\obj\Debug\Project.Stat_group.resources
+D:\учеба\physical\Project\Project\obj\Debug\Project.Stat_section.resources
