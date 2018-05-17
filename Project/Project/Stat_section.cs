@@ -25,7 +25,6 @@ namespace Project
         private void button1_Click(object sender, EventArgs e)
         {
             chart1.Series[0].Points.Clear();
-            //chart1.Series[0].LegendText = comboBox2.Text;
 
             List<double> arrX = new List<double>();
             List<string> arrY = new List<string>();

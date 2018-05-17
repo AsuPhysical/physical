@@ -16,7 +16,6 @@ namespace Project
         public Stat_student()
         {
             InitializeComponent();
-            Class1.Teachr_fio = "Могутов Мир Платонович";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);
@@ -41,11 +40,9 @@ namespace Project
             " and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and" +
             " SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and st_ank1.STFAM || ' ' || STNAME || ' ' || STOT = '" + comboBox1.Text + "'"; 
 
-
-
             OracleCommand oc = new OracleCommand(stat1, ORACLE);
             OracleDataReader odr = oc.ExecuteReader();
-            //MessageBox.Show(odr.GetInt32(0).ToString);
+
             while (odr.Read())
             {
                 arrX.Add(odr.GetInt32(0));
@@ -71,7 +68,7 @@ namespace Project
         {
             ORACLE.Open();
             oraAdap.SelectCommand = new OracleCommand();
-            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio + "'";
+            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio.Trim() + "'";
             oraAdap.SelectCommand.Connection = ORACLE;
             OracleDataReader oraReader = oraAdap.SelectCommand.ExecuteReader();
             while (oraReader.Read())

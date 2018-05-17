@@ -106,24 +106,29 @@ namespace Project
                 }
             }
 
+            Console.WriteLine(date_lesson.Rows.Count);
 
-            for (int i = 0; i < (journal.Rows.Count / date_lesson.Rows.Count) - 1; i++)
-            {
-                DataRow newRow = grid.NewRow();
-                newRow[0] = journal.Rows[i + date_lesson.Rows.Count][0];
-                for (int j = 0; j < date_lesson.Rows.Count; j++)
-                {
-                    for (int h = 2; h < grid.Columns.Count; h=h+2)
-                    {
-                        if (journal.Rows[j][1].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10))
-                        {
-                            newRow[j] = journal.Rows[j][3].ToString().Substring(0, 10);
-                        } 
+            //for (int i = 0; i < (journal.Rows.Count / date_lesson.Rows.Count) - 1; i++)
+            //{
+            //    DataRow newRow = grid.NewRow();
+            //    newRow[0] = journal.Rows[i + date_lesson.Rows.Count][0];
+            //    for (int j = 0; j < date_lesson.Rows.Count; j++)
+            //    {
+            //        for (int h = 2; h < grid.Columns.Count; h=h+2)
+            //        {
+            //            if (journal.Rows[j][1].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10))
+            //            {
+            //                newRow[j] = journal.Rows[j][3].ToString().Substring(0, 10);
+            //            }
+            //            if (journal.Rows[j][2].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10) && journal.Rows[j][2].ToString().Substring(0, 10) == normative.ToString())
+            //            {
+            //                newRow[j] = journal.Rows[j][2].ToString().Substring(0, 10);
+            //            }
 
-                    }
-                }
-                Console.WriteLine(newRow[0]);
-            }
+            //        }
+            //    }
+            //    Console.WriteLine(newRow[0]);
+            //}
 
             dataGridView2.DataSource = grid;
 

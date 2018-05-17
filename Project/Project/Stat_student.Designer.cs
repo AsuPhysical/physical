@@ -73,7 +73,7 @@
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(29, 156);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(336, 30);
             this.comboBox2.TabIndex = 14;
@@ -86,7 +86,7 @@
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.IntegralHeight = false;
             this.comboBox3.Location = new System.Drawing.Point(29, 70);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(336, 30);
             this.comboBox3.TabIndex = 13;
@@ -124,9 +124,9 @@
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(29, 310);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(336, 41);
+            this.button1.Size = new System.Drawing.Size(336, 47);
             this.button1.TabIndex = 10;
             this.button1.Text = "Вывести";
             this.button1.UseVisualStyleBackColor = true;
@@ -159,7 +159,7 @@
             this.button3.Location = new System.Drawing.Point(29, 382);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(336, 42);
+            this.button3.Size = new System.Drawing.Size(336, 58);
             this.button3.TabIndex = 19;
             this.button3.Text = "Выбрать другую статистику";
             this.button3.UseVisualStyleBackColor = true;

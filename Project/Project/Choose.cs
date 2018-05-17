@@ -17,7 +17,6 @@ namespace Project
         {
             InitializeComponent();
         }
-        // ДОПИЛИТЬ ДИАГРАММУ БОЛЬНЫХ/ЗДОРОВЫХ
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
@@ -39,7 +38,7 @@ namespace Project
                 (new Stat_section()).Show();
                 this.Hide();
             }
-            if (comboBox1.Text == "4")
+            if (comboBox1.Text == "Статистика по определенному нормативу среди определенного курса")
             {
                 (new Stat_group()).Show();
                 this.Hide();
@@ -51,12 +50,9 @@ namespace Project
         {
             ORACLE.Open();
             chart1.Series[0].Points.Clear();
-            //chart1.Series[0].LegendText = comboBox2.Text;
 
             List<int> arrX = new List<int>();
             List<string> arrY = new List<string>();
-
-            //// Статистика по определенному нормативу, за определенный год ВСЕХ ИЛИ Одной группы
 
             string stat1 = "select Count(STFAM) from st_ank1, SP_PHYSICAL_GROUP where SP_PHYSICAL_GROUP.ID = st_ank1.PHYSICAL_ID group by SP_PHYSICAL_GROUP.TITLE";
 
@@ -77,10 +73,7 @@ namespace Project
                 arrY.Add(odr.GetString(0).Trim());
             }
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
-
         }
-
-
 
         private void button2_Click(object sender, EventArgs e)
         {

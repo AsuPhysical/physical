@@ -28,7 +28,7 @@ namespace Project
             ORACLE.Open();
             oraAdap.SelectCommand = new OracleCommand();
             //oraAdap.SelectCommand.CommandText = "Select * from SP_ST_GROUP ";
-            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio + "'";
+            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio.Trim() + "'";
 
             oraAdap.SelectCommand.Connection = ORACLE;
             OracleDataReader oraReader = oraAdap.SelectCommand.ExecuteReader();

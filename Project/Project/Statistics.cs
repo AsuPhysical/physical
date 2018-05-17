@@ -37,9 +37,6 @@ namespace Project
 
             List<double> arrX = new List<double>();
             List<string> arrY = new List<string>();
-            //double[] arrY = new double[250];
-
-            //// Статистика по определенному нормативу, за определенный год ВСЕХ ИЛИ Одной группы
             
             string stat1 = "select value_norm from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP where journal.DATE_LESSON = date_normative.DATE_NORMATIVE " +
             "and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and " +
@@ -66,14 +63,13 @@ namespace Project
             chart1.ChartAreas[0].AxisX.Interval = 1;
             chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
-
         }
 
         private void Load_List()
         {
             ORACLE.Open();
             oraAdap.SelectCommand = new OracleCommand();
-            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio + "'";
+            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio.Trim() + "'";
             oraAdap.SelectCommand.Connection = ORACLE;
             OracleDataReader oraReader = oraAdap.SelectCommand.ExecuteReader();
             while (oraReader.Read())

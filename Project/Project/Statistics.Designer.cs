@@ -46,9 +46,9 @@
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(35, 214);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(265, 41);
+            this.button1.Size = new System.Drawing.Size(265, 48);
             this.button1.TabIndex = 1;
             this.button1.Text = "Вывести статистику";
             this.button1.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(35, 150);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(265, 30);
             this.comboBox2.TabIndex = 7;
@@ -123,7 +123,7 @@
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.IntegralHeight = false;
             this.comboBox3.Location = new System.Drawing.Point(35, 65);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(265, 30);
             this.comboBox3.TabIndex = 6;
@@ -134,7 +134,7 @@
             this.button3.Location = new System.Drawing.Point(35, 279);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(265, 60);
+            this.button3.Size = new System.Drawing.Size(265, 63);
             this.button3.TabIndex = 20;
             this.button3.Text = "Выбрать другую статистику";
             this.button3.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Statistics";
             this.Text = "Статистика в конкретной группе по определенному нормативу";
             this.Load += new System.EventHandler(this.Statistics_Load);

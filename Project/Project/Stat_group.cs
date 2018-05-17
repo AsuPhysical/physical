@@ -40,12 +40,12 @@ namespace Project
                stat1 = "select value_norm from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP, TEACH_GROUP, SP_TEACHERS " +
                " where journal.DATE_LESSON = date_normative.DATE_NORMATIVE and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and  " +
                "SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and SUBSTR(SP_ST_GROUP.TITLE, 4, 1) = '" + comboBox1.Text + "' and " +
-               "TEACH_GROUP.ID_GROUP = st_ank1.GROUP_ID and SP_TEACHERS.ID_TEACHER = TEACH_GROUP.ID_TEACH and SP_TEACHERS.FIO = '" + Class1.Teachr_fio + "'";
+               "TEACH_GROUP.ID_GROUP = st_ank1.GROUP_ID and SP_TEACHERS.ID_TEACHER = TEACH_GROUP.ID_TEACH and SP_TEACHERS.FIO = '" + Class1.Teachr_fio.Trim() + "'";
 
                 stat2 = "select STFAM as FIO from journal, date_normative, SP_NORMATIVE, st_ank1, SP_ST_GROUP, TEACH_GROUP, SP_TEACHERS " +
                " where journal.DATE_LESSON = date_normative.DATE_NORMATIVE and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and  " +
                "SP_ST_GROUP.ID = st_ank1.GROUP_ID and SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and SUBSTR(SP_ST_GROUP.TITLE, 4, 1) = '" + comboBox1.Text + "' and " +
-               "TEACH_GROUP.ID_GROUP = st_ank1.GROUP_ID and SP_TEACHERS.ID_TEACHER = TEACH_GROUP.ID_TEACH and SP_TEACHERS.FIO = '" + Class1.Teachr_fio + "'";
+               "TEACH_GROUP.ID_GROUP = st_ank1.GROUP_ID and SP_TEACHERS.ID_TEACHER = TEACH_GROUP.ID_TEACH and SP_TEACHERS.FIO = '" + Class1.Teachr_fio.Trim() + "'";
             }
             else
             {
@@ -77,9 +77,7 @@ namespace Project
             }
             chart1.ChartAreas[0].AxisX.Interval = 1;
             chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
-            //chart1.ChartAreas[0].AxisX = ChartValueType.String;
-            chart1.Series[0].Points.DataBindXY(arrY, arrX);
-            
+            chart1.Series[0].Points.DataBindXY(arrY, arrX);        
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -116,7 +114,7 @@ namespace Project
 
         private void chart1_GetToolTipText(object sender, ToolTipEventArgs e)
         {
-            //chart1.Series[0].ToolTip = "X = #VALX, Y = #VAL";
+
         }
     }
 }

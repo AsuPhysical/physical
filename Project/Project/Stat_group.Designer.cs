@@ -110,7 +110,7 @@
             this.button1.Location = new System.Drawing.Point(51, 283);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(265, 41);
+            this.button1.Size = new System.Drawing.Size(265, 45);
             this.button1.TabIndex = 30;
             this.button1.Text = "Вывести статистику";
             this.button1.UseVisualStyleBackColor = true;

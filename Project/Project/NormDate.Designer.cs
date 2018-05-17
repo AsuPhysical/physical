@@ -122,7 +122,7 @@
             this.button2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(62, 433);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(264, 35);
+            this.button2.Size = new System.Drawing.Size(264, 45);
             this.button2.TabIndex = 7;
             this.button2.Text = "Добавить";
             this.button2.UseVisualStyleBackColor = true;
