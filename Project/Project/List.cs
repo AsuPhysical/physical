@@ -61,7 +61,10 @@ namespace Project
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int count = this.dataGridView2.Columns.Count; for (int i = 0; i < count; i++) // цикл удаления всех столбцов 
+            { this.dataGridView2.Columns.RemoveAt(0); }
             Update_Load();
+            //dataGridView2.Columns.Add(new DataGridViewTextBoxColumn() { Name = "БАЛЛ", HeaderText = "БАЛЛ", Width = 100 });
         }
         private void Update_Load()
         {
@@ -86,47 +89,40 @@ namespace Project
             oraAdap.Fill(date_lesson);
 
             DataTable grid = new DataTable();
+            grid.Columns.Add("Балл");
             grid.Columns.Add("ФИО");
+            //int j = 0;
 
-            if(date_lesson.Rows.Count==0) return;
+            //Console.WriteLine(date_lesson.Rows.Count);
             for (int i = 0; i < date_lesson.Rows.Count; i++)
             {
-                string flag = "\n\rПрисутствие";
-                for (int j = 0; j < normative.Rows.Count; j++)
+                grid.Columns.Add(date_lesson.Rows[i][0].ToString().Substring(0, 10) + "\n\rПрисутствие");
+                for(int j = 0; j<normative.Rows.Count; j++)
                 {
-                    if (date_lesson.Rows[i][0].ToString() == normative.Rows[j][0].ToString())
+                    if (date_lesson.Rows[i][0].ToString().Contains(normative.Rows[j][0].ToString()))
                     {
-                        flag = "\n\rНорматив";
+                        grid.Columns.Add(date_lesson.Rows[i][0].ToString().Substring(0, 10) + "\n\rНорматив");
                     }
                 }
-                grid.Columns.Add(date_lesson.Rows[i][0].ToString().Substring(0, 10) + flag);
             }
 
 
-            for (int i = 0; i < journal.Rows.Count-1; i++)
+            for (int i = 0; i < (journal.Rows.Count / date_lesson.Rows.Count) - 1; i++)
             {
                 DataRow newRow = grid.NewRow();
-                newRow[0] = journal.Rows[(date_lesson.Rows.Count)*(i+1)-1][0];
-                for (int j = 1; j < date_lesson.Rows.Count+1; j++)
+                newRow[0] = journal.Rows[i + date_lesson.Rows.Count][0];
+                for (int j = 0; j < date_lesson.Rows.Count; j++)
                 {
-                    for (int h = 1; h < grid.Columns.Count; h++)
+                    for (int h = 2; h < grid.Columns.Count; h=h+2)
                     {
-                        if (journal.Rows[j][1].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10) && grid.Columns[h].ColumnName.Substring(10) == "\n\rПрисутствие")
+                        if (journal.Rows[j][1].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10))
                         {
-                            newRow[j] = journal.Rows[j][3];
-                        }
-                        else if(journal.Rows[j][1].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10) && grid.Columns[h].ColumnName.Substring(10) == "\n\rНорматив")
-                        {
-                            Console.WriteLine(j + " " + newRow[j]);
-                            newRow[j] = journal.Rows[j][2];
-                        }
+                            newRow[j] = journal.Rows[j][3].ToString().Substring(0, 10);
+                        } 
+
                     }
                 }
-                if ((date_lesson.Rows.Count) *(i + 1) % date_lesson.Rows.Count == 0)
-                {
-                    grid.Rows.Add(newRow);
-                }
-                if ((date_lesson.Rows.Count) * (i + 1) == journal.Rows.Count) break;
+                Console.WriteLine(newRow[0]);
             }
 
             dataGridView2.DataSource = grid;
