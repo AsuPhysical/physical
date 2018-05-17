@@ -46,9 +46,10 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button6.Location = new System.Drawing.Point(311, 200);
+            this.button6.Location = new System.Drawing.Point(233, 162);
+            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(196, 33);
+            this.button6.Size = new System.Drawing.Size(147, 27);
             this.button6.TabIndex = 26;
             this.button6.Text = "Поиск";
             this.button6.UseVisualStyleBackColor = true;
@@ -57,9 +58,10 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(1330, 38);
+            this.button5.Location = new System.Drawing.Point(998, 31);
+            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(111, 33);
+            this.button5.Size = new System.Drawing.Size(83, 27);
             this.button5.TabIndex = 25;
             this.button5.Text = "Меню";
             this.button5.UseVisualStyleBackColor = true;
@@ -69,10 +71,11 @@
             // 
             this.listBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 22;
-            this.listBox1.Location = new System.Drawing.Point(41, 84);
+            this.listBox1.ItemHeight = 19;
+            this.listBox1.Location = new System.Drawing.Point(31, 68);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(236, 466);
+            this.listBox1.Size = new System.Drawing.Size(178, 365);
             this.listBox1.TabIndex = 24;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -80,64 +83,50 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(316, 279);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(237, 227);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(181, 27);
+            this.label4.Size = new System.Drawing.Size(158, 21);
             this.label4.TabIndex = 23;
-            this.label4.Text = "Выберите месяц";
+            this.label4.Text = "Выберите семестр";
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Январь",
-            "Февраль",
-            "Март",
-            "Апрель",
-            "Май",
-            "Июнь",
-            "Июль",
-            "Август",
-            "Сентябрь",
-            "Октябрь",
-            "Ноябрь",
-            "Декабрь"});
-            this.comboBox1.Location = new System.Drawing.Point(311, 310);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            "1",
+            "2"});
+            this.comboBox1.Location = new System.Drawing.Point(233, 252);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(196, 30);
+            this.comboBox1.Size = new System.Drawing.Size(148, 27);
             this.comboBox1.TabIndex = 22;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(320, 113);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(240, 92);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(171, 27);
+            this.label3.Size = new System.Drawing.Size(135, 21);
             this.label3.TabIndex = 21;
             this.label3.Text = "Поиск студента";
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(312, 150);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(234, 122);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(196, 31);
+            this.textBox1.Size = new System.Drawing.Size(148, 26);
             this.textBox1.TabIndex = 20;
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(311, 381);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(233, 310);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(197, 59);
+            this.button2.Size = new System.Drawing.Size(148, 48);
             this.button2.TabIndex = 19;
             this.button2.Text = "Сохранить изменения";
             this.button2.UseVisualStyleBackColor = true;
@@ -146,10 +135,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(311, 451);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(233, 366);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(197, 52);
+            this.button1.Size = new System.Drawing.Size(148, 42);
             this.button1.TabIndex = 18;
             this.button1.Text = "Расчитать итоговый балл";
             this.button1.UseVisualStyleBackColor = true;
@@ -159,38 +147,36 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(546, 44);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(410, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(195, 27);
+            this.label2.Size = new System.Drawing.Size(156, 21);
             this.label2.TabIndex = 17;
             this.label2.Text = "Список студентов";
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(542, 82);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView2.Location = new System.Drawing.Point(406, 67);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(899, 464);
+            this.dataGridView2.Size = new System.Drawing.Size(674, 377);
             this.dataGridView2.TabIndex = 16;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(38, 44);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(28, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 27);
+            this.label1.Size = new System.Drawing.Size(123, 21);
             this.label1.TabIndex = 15;
             this.label1.Text = "Список групп";
             // 
             // LFK
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1479, 590);
+            this.ClientSize = new System.Drawing.Size(1109, 479);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.listBox1);
@@ -203,6 +189,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "LFK";
             this.Text = "LFK";
             this.Load += new System.EventHandler(this.LFK_Load);

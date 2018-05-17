@@ -19,7 +19,6 @@ namespace Project
         public List()
         {
             InitializeComponent();
-            Class1.Teachr_fio = "Могутов Мир Платонович";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);
@@ -112,7 +111,8 @@ namespace Project
                     {
                         if (journal.Rows[j][1].ToString().Substring(0, 10).ToString() == grid.Columns[h].ColumnName.Substring(0, 10).ToString() && grid.Columns[h].ColumnName.Substring(10) == "\n\rПрисутствие" && newRow[0].ToString() == journal.Rows[j][0].ToString())
                         {
-                            newRow[h] = journal.Rows[j][3];
+                            if (journal.Rows[j][3].ToString() == "1") newRow[h] = "Б";
+                            if (journal.Rows[j][3].ToString() == "0") newRow[h] = "Н";
                         }
                         else if (journal.Rows[j][1].ToString().Substring(0, 10).ToString() == grid.Columns[h].ColumnName.Substring(0, 10).ToString() && grid.Columns[h].ColumnName.Substring(10) == "\n\rНорматив" && newRow[0].ToString() == journal.Rows[j][0].ToString())
                         {
@@ -197,7 +197,8 @@ namespace Project
                     newRow[1] = data.Columns[j].ColumnName.Substring(0,10);
                     if (data.Columns[j].ColumnName.Substring(10) == "\n\rПрисутствие")
                     {
-                        newRow[3] = data.Rows[i][j];
+                        if(data.Rows[i][j].ToString() == "Б") newRow[3] = "1";
+                        if(data.Rows[i][j].ToString() == "Н") newRow[3] = "0";
                         newRow[2] = "0";
                     }  
                     if (data.Columns[j].ColumnName.Substring(10) == "\n\rНорматив")
