@@ -102,23 +102,21 @@ namespace Project
                 grid.Columns.Add(date_lesson.Rows[i][0].ToString().Substring(0, 10) + flag);
             }
 
-
-            for (int i = 0; i < journal.Rows.Count-1; i++)
+            for (int i = 0; i <= journal.Rows.Count-1; i++)
             {
                 DataRow newRow = grid.NewRow();
                 newRow[0] = journal.Rows[(date_lesson.Rows.Count)*(i+1)-1][0];
-                for (int j = 1; j < date_lesson.Rows.Count+1; j++)
+                for (int j = 0; j <= journal.Rows.Count-1; j++)
                 {
                     for (int h = 1; h < grid.Columns.Count; h++)
                     {
-                        if (journal.Rows[j][1].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10) && grid.Columns[h].ColumnName.Substring(10) == "\n\rПрисутствие")
+                        if (journal.Rows[j][1].ToString().Substring(0, 10).ToString() == grid.Columns[h].ColumnName.Substring(0, 10).ToString() && grid.Columns[h].ColumnName.Substring(10) == "\n\rПрисутствие" && newRow[0].ToString() == journal.Rows[j][0].ToString())
                         {
-                            newRow[j] = journal.Rows[j][3];
+                            newRow[h] = journal.Rows[j][3];
                         }
-                        else if(journal.Rows[j][1].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10) && grid.Columns[h].ColumnName.Substring(10) == "\n\rНорматив")
+                        else if (journal.Rows[j][1].ToString().Substring(0, 10).ToString() == grid.Columns[h].ColumnName.Substring(0, 10).ToString() && grid.Columns[h].ColumnName.Substring(10) == "\n\rНорматив" && newRow[0].ToString() == journal.Rows[j][0].ToString())
                         {
-                            Console.WriteLine(j + " " + newRow[j]);
-                            newRow[j] = journal.Rows[j][2];
+                            newRow[h] = journal.Rows[j][2];
                         }
                     }
                 }
@@ -130,96 +128,6 @@ namespace Project
             }
 
             dataGridView2.DataSource = grid;
-
-
-
-
-
-
-
-
-
-
-
-            //xmlCmd.BindByName = true;
-            //xmlCmd.XmlQueryProperties.MaxRows = -1;
-            //XmlReader xmlReader = xmlCmd.ExecuteXmlReader();
-            //XmlDocument xmlDocument = new XmlDocument();
-            //xmlDocument.PreserveWhitespace = true;
-            //xmlDocument.Load(xmlReader);
-            //XmlNodeReader reader = new XmlNodeReader(xmlDocument);
-            //DataSet data = new DataSet();
-            //data.ReadXml(reader);
-            //reader.Close();
-
-
-            //dataGridView2.DataSource = data.Tables["column"];
-
-            //DataTable oldTable = new DataTable();
-            //oldTable = data.Tables["column"];
-
-            //DataTable newTable = new DataTable();
-            //foreach (DataRow x in data.Tables["item"].Rows)
-            //{
-            //    newTable.Columns.Add(x["DATE_LESSON"].ToString());
-            //    newTable.Columns.Add(x["DATE_LESSON"].ToString());
-            //    DataRow newRow = newTable.NewRow();
-            //    for (int i = 0; i <= newTable.Columns.Count; i++)
-            //        newRow[i] = x["SUM(VALUE_NORM)"];
-            //    newTable.Rows.Add(newRow);
-            //}
-
-            //dataGridView2.DataSource = oldTable;
-
-            //oldTable.DefaultView.RowFilter = string.Format("[column_Text] LIKE '2018-02-26'");
-
-            //DataTable newTable = new DataTable();
-
-            //newTable.Columns.Add("Балл");
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    Console.WriteLine(oldTable.Rows[i][1]);
-            //    DataRow newRow = newTable.NewRow();
-            //    newTable.Columns.Add(oldTable.Rows[i][1].ToString());
-            //    newTable.Columns.Add("Норматив" + i);
-            //    newRow[i + 1] = oldTable.Rows[i + 1][1];
-            //    newRow[i + 2] = oldTable.Rows[i + 2][1];
-            //    newTable.Rows.Add(newRow);
-            //}
-
-            //for (int i = 0; i < oldTable.Columns.Count; i++)
-            //{
-            //    DataRow newRow = newTable.NewRow();
-
-            //    newRow[0] = oldTable.Columns[i].Caption;
-            //    for (int j = 0; j < oldTable.Rows.Count; j++)
-            //    {
-            //        Console.WriteLine(oldTable.Rows[j][i]);
-            //        newRow[j + 1] = oldTable.Rows[j][i];
-            //    }
-
-            //    newTable.Rows.Add(newRow);
-            //}
-
-            //dataGridView2.DataSource = newTable;
-
-
-
-            //OracleDataReader poReader = xmlCmd.ExecuteReader();
-            //OracleXmlType poXml;
-            //string str = "";
-            //while (poReader.Read())
-            //{
-            //    poXml = poReader.GetOracleXmlType(0);
-            //    str = str + poXml.Value;
-            //}
-            //con.Close();
-            //Console.WriteLine(str);
-            //DataTable data = new DataTable();
-            //oraAdap.Fill(data);
-            //dataGridView2.DataSource = xmlDocument.OuterXml;
-            //DataGridViewTextBoxColumn dgvAge;
-            //dgvAge = new DataGridViewTextBoxColumn();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -258,29 +166,69 @@ namespace Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //int n, nrow, sum = 0;
-            //Double result, result1;
-            //String s;
-            //nrow = dataGridView2.Columns.Count;
-            //for (int i = 0; i < nrow; i++)
-            //{
-            //    s = dataGridView2.Rows[i].Cells[3].Value.ToString();
-            //    n = int.Parse(s);
-            //    sum += n;
-            //    result = sum;
-            //    result1 = Math.Round(result / 3, 2);
-            //    datagridView2.Rows[i].Cells[6].Value = result1;
 
-            //}
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            DataTable data = dataGridView2.DataSource as DataTable;
+            DataTable bd = new DataTable();
+            bd.Columns.Add("FIO");
+            bd.Columns.Add("DATE_LESSON");
+            bd.Columns.Add("VALUE_NORM");
+            bd.Columns.Add("ATTENDANCE");
+            oraAdap.SelectCommand.CommandText = "Select distinct STFAM||' '||STNAME||' '||STOT as FIO, k_st from journal, sp_st_group, st_ank1 where st_ank1.K_ST = journal.ID_STUDENT and st_ank1.GROUP_ID = sp_st_group.ID " +
+                "and sp_st_group.TITLE = '"+listBox1.SelectedItem+"' and Substr(DATE_LESSON,4, 2) = '"+month+"'";
+            DataTable id_stud = new DataTable();
+            oraAdap.Fill(id_stud);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                for (int j = 1; j < data.Columns.Count; j++)
+                {
+                    DataRow newRow = bd.NewRow();
+                    for (int h = 0; h < id_stud.Rows.Count; h++)
+                    {
+                        if (id_stud.Rows[h][0].ToString() == data.Rows[i][0].ToString())
+                        {
+                            newRow[0] = id_stud.Rows[h][1];
+                        }
+                    }
+                    newRow[1] = data.Columns[j].ColumnName.Substring(0,10);
+                    if (data.Columns[j].ColumnName.Substring(10) == "\n\rПрисутствие")
+                    {
+                        newRow[3] = data.Rows[i][j];
+                        newRow[2] = "0";
+                    }  
+                    if (data.Columns[j].ColumnName.Substring(10) == "\n\rНорматив")
+                    {
+                        newRow[3] = "1";
+                        newRow[2] = data.Rows[i][j];
+                    }
+                    bd.Rows.Add(newRow);
+                }
+            }
+            
+            oraAdap.SelectCommand.CommandText = "select * from journal";
+            DataTable journal = new DataTable();
+            oraAdap.Fill(journal);
+            for (int i = 0; i < journal.Rows.Count; i++)
+            {
+                for (int j = 0; j < bd.Rows.Count; j++)
+                {
+                    if (journal.Rows[i][0].ToString() == bd.Rows[j][0].ToString() && journal.Rows[i][1].ToString().Substring(0,10) == bd.Rows[j][1].ToString())
+                    {
+                        journal.Rows[i][2] = bd.Rows[j][2];
+                        journal.Rows[i][3] = bd.Rows[j][3];
+                    }
+                }
+               
+            }
+
             try
             {
-                DataTable data = dataGridView2.DataSource as DataTable;
                 OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);
-                oraAdap.Update(data);
+                oraAdap.Update(journal);
                 MessageBox.Show("Данные сохранены");
             }
             catch
