@@ -24,17 +24,17 @@ namespace Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text=="1")
+            if (comboBox1.Text== "Статистика в конкретной группе по определенному нормативу")
             {
                 (new Statistics()).Show();
                  this.Hide();
             }
-            if (comboBox1.Text == "2")
+            if (comboBox1.Text == "Статистика данных по студенту по определенному нормативу за все время обучения")
             {
                 (new Stat_student()).Show();
                 this.Hide();
             }
-            if (comboBox1.Text == "3")
+            if (comboBox1.Text == "Сравнение данных по определенному нормативу в разных спортивных секциях")
             {
                 (new Stat_section()).Show();
                 this.Hide();

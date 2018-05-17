@@ -63,7 +63,8 @@ namespace Project
                 arrY.Add(odr.GetString(0));
             }
 
-
+            chart1.ChartAreas[0].AxisX.Interval = 1;
+            chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
 
         }

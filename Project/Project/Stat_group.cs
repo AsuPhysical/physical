@@ -17,17 +17,16 @@ namespace Project
         public Stat_group()
         {
             InitializeComponent();
-            Class1.Teachr_fio = "Могутов Мир Платонович ";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
+        ToolTip toolTip1 = new ToolTip();
 
         private void button1_Click(object sender, EventArgs e)
         {
             chart1.Series[0].Points.Clear();
-            //chart1.Series[0].ToolTip = "X = #VALX, Y = #VALY";
             chart1.GetToolTipText += chart1_GetToolTipText;
             //chart1.Series[0].LegendText = comboBox2.Text;
 
@@ -66,6 +65,7 @@ namespace Project
             while (odr.Read())
             {
                 arrX.Add(odr.GetInt32(0));
+                Console.WriteLine("x " + odr.GetInt32(0));
             }
 
             oc = new OracleCommand(stat2, ORACLE);
@@ -73,7 +73,11 @@ namespace Project
             while (odr.Read())
             {
                 arrY.Add(odr.GetString(0));
+                Console.WriteLine("y " + odr.GetString(0));
             }
+            chart1.ChartAreas[0].AxisX.Interval = 1;
+            chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
+            //chart1.ChartAreas[0].AxisX = ChartValueType.String;
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
             
         }
@@ -110,11 +114,9 @@ namespace Project
             Load_List();
         }
 
-        private void chart1_GetToolTipText(object sender, System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs e)
+        private void chart1_GetToolTipText(object sender, ToolTipEventArgs e)
         {
-            chart1.Series[0].ToolTip = "X = #VAL, Y = #VALY";
-
+            //chart1.Series[0].ToolTip = "X = #VALX, Y = #VAL";
         }
-
     }
 }

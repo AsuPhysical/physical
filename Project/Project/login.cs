@@ -52,7 +52,7 @@ namespace Project
                 {
                     (new Menu()).Show();
                     this.Hide();
-                    Class1.Teachr_fio = textBox.Text.Trim();
+                    Class1.Teachr_fio = textBox.Text;
                     ORACLE.Close();
                 }
                 else { MessageBox.Show("Неверно ввели данные"); }
