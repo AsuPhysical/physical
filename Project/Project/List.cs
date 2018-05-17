@@ -64,7 +64,7 @@ namespace Project
             int count = this.dataGridView2.Columns.Count; for (int i = 0; i < count; i++) // цикл удаления всех столбцов 
             { this.dataGridView2.Columns.RemoveAt(0); }
             Update_Load();
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn() { Name = "БАЛЛ", HeaderText = "БАЛЛ", Width = 100 });
+            //dataGridView2.Columns.Add(new DataGridViewTextBoxColumn() { Name = "БАЛЛ", HeaderText = "БАЛЛ", Width = 100 });
         }
         private void Update_Load()
         {
@@ -73,50 +73,131 @@ namespace Project
             {
                 group = listBox1.SelectedItems[0].ToString();
             }
-            //oraAdap.SelectCommand.CommandText = "Select * from journal where Substr(DATE_LESSON,4,2) = '"+ month + "'";
 
-            OracleCommand xmlCmd = new OracleCommand("", ORACLE);
-            xmlCmd.XmlCommandType = OracleXmlCommandType.Query;
-            xmlCmd.CommandText = "select DATE_LESSON_XML from JOURNAL_VIEW";
-            xmlCmd.BindByName = true;
-            xmlCmd.XmlQueryProperties.MaxRows = -1;
-            XmlReader xmlReader = xmlCmd.ExecuteXmlReader();
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.PreserveWhitespace = true;
-            xmlDocument.Load(xmlReader);
-            XmlNodeReader reader = new XmlNodeReader(xmlDocument);
-            DataSet data = new DataSet();
-            data.ReadXml(reader);
-            reader.Close();
+            oraAdap.SelectCommand.CommandText = "Select STFAM||' '||STNAME||' '||STOT as FIO, date_lesson, value_norm, attendance from journal, sp_st_group, st_ank1 where st_ank1.K_ST = journal.ID_STUDENT " +
+                " and st_ank1.GROUP_ID = sp_st_group.ID and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and Substr(DATE_LESSON,4, 2) = '" + month + "' order by FIO";
+            DataTable journal = new DataTable();
+            oraAdap.Fill(journal);
+
+            oraAdap.SelectCommand.CommandText = "select DATE_NORMATIVE from date_normative";
+            DataTable normative = new DataTable();
+            oraAdap.Fill(normative);
+
+            oraAdap.SelectCommand.CommandText = "Select distinct date_lesson from journal, sp_st_group, st_ank1 where st_ank1.K_ST = journal.ID_STUDENT and st_ank1.GROUP_ID = sp_st_group.ID " +
+                "and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and Substr(DATE_LESSON,4, 2) = '" + month + "'";
+            DataTable date_lesson = new DataTable();
+            oraAdap.Fill(date_lesson);
+
+            DataTable grid = new DataTable();
+            grid.Columns.Add("Балл");
+            grid.Columns.Add("ФИО");
+            //int j = 0;
+
+            //Console.WriteLine(date_lesson.Rows.Count);
+            for (int i = 0; i < date_lesson.Rows.Count; i++)
+            {
+                grid.Columns.Add(date_lesson.Rows[i][0].ToString().Substring(0, 10) + "\n\rПрисутствие");
+                for(int j = 0; j<normative.Rows.Count; j++)
+                {
+                    if (date_lesson.Rows[i][0].ToString().Contains(normative.Rows[j][0].ToString()))
+                    {
+                        grid.Columns.Add(date_lesson.Rows[i][0].ToString().Substring(0, 10) + "\n\rНорматив");
+                    }
+                }
+            }
+
+
+            for (int i = 0; i < (journal.Rows.Count / date_lesson.Rows.Count) - 1; i++)
+            {
+                DataRow newRow = grid.NewRow();
+                newRow[0] = journal.Rows[i + date_lesson.Rows.Count][0];
+                for (int j = 0; j < date_lesson.Rows.Count; j++)
+                {
+                    for (int h = 2; h < grid.Columns.Count; h=h+2)
+                    {
+                        if (journal.Rows[j][1].ToString().Substring(0, 10) == grid.Columns[h].ColumnName.Substring(0, 10))
+                        {
+                            newRow[j] = journal.Rows[j][3].ToString().Substring(0, 10);
+                        } 
+
+                    }
+                }
+                Console.WriteLine(newRow[0]);
+            }
+
+            dataGridView2.DataSource = grid;
+
+
+
+
+
+
+
+
+
+
+
+            //xmlCmd.BindByName = true;
+            //xmlCmd.XmlQueryProperties.MaxRows = -1;
+            //XmlReader xmlReader = xmlCmd.ExecuteXmlReader();
+            //XmlDocument xmlDocument = new XmlDocument();
+            //xmlDocument.PreserveWhitespace = true;
+            //xmlDocument.Load(xmlReader);
+            //XmlNodeReader reader = new XmlNodeReader(xmlDocument);
+            //DataSet data = new DataSet();
+            //data.ReadXml(reader);
+            //reader.Close();
 
 
             //dataGridView2.DataSource = data.Tables["column"];
 
-            DataTable oldTable = new DataTable();
-            oldTable = data.Tables["column"];
-            dataGridView2.DataSource = oldTable;
+            //DataTable oldTable = new DataTable();
+            //oldTable = data.Tables["column"];
+
+            //DataTable newTable = new DataTable();
+            //foreach (DataRow x in data.Tables["item"].Rows)
+            //{
+            //    newTable.Columns.Add(x["DATE_LESSON"].ToString());
+            //    newTable.Columns.Add(x["DATE_LESSON"].ToString());
+            //    DataRow newRow = newTable.NewRow();
+            //    for (int i = 0; i <= newTable.Columns.Count; i++)
+            //        newRow[i] = x["SUM(VALUE_NORM)"];
+            //    newTable.Rows.Add(newRow);
+            //}
+
+            //dataGridView2.DataSource = oldTable;
 
             //oldTable.DefaultView.RowFilter = string.Format("[column_Text] LIKE '2018-02-26'");
 
-            DataTable newTable = new DataTable();
+            //DataTable newTable = new DataTable();
 
-            newTable.Columns.Add("Field Name");
-            for (int i = 0; i < oldTable.Rows.Count; i++)
-            {
-                newTable.Columns.Add();
-            }
+            //newTable.Columns.Add("Балл");
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    Console.WriteLine(oldTable.Rows[i][1]);
+            //    DataRow newRow = newTable.NewRow();
+            //    newTable.Columns.Add(oldTable.Rows[i][1].ToString());
+            //    newTable.Columns.Add("Норматив" + i);
+            //    newRow[i + 1] = oldTable.Rows[i + 1][1];
+            //    newRow[i + 2] = oldTable.Rows[i + 2][1];
+            //    newTable.Rows.Add(newRow);
+            //}
 
-            for (int i = 0; i < oldTable.Columns.Count; i++)
-            {
-                DataRow newRow = newTable.NewRow();
+            //for (int i = 0; i < oldTable.Columns.Count; i++)
+            //{
+            //    DataRow newRow = newTable.NewRow();
 
-                newRow[0] = oldTable.Columns[i].Caption;
-                for (int j = 0; j < oldTable.Rows.Count; j++)
-                    newRow[j + 1] = oldTable.Rows[j][i];
-                newTable.Rows.Add(newRow);
-            }
+            //    newRow[0] = oldTable.Columns[i].Caption;
+            //    for (int j = 0; j < oldTable.Rows.Count; j++)
+            //    {
+            //        Console.WriteLine(oldTable.Rows[j][i]);
+            //        newRow[j + 1] = oldTable.Rows[j][i];
+            //    }
 
-            
+            //    newTable.Rows.Add(newRow);
+            //}
+
+            //dataGridView2.DataSource = newTable;
 
 
 
