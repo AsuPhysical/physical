@@ -21,7 +21,7 @@ namespace Project
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
-        string month = DateTime.Now.ToString("MM");
+        string month = "";
 
         private void Load_List()
         {
@@ -54,10 +54,7 @@ namespace Project
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int count = this.dataGridView2.Columns.Count; for (int i = 0; i < count; i++) // цикл удаления всех столбцов 
-            { this.dataGridView2.Columns.RemoveAt(0); }
             Update_Load();
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn() { Name = "БАЛЛ", HeaderText = "БАЛЛ", Width = 100 });
         }
 
         private void Update_Load()
@@ -67,14 +64,21 @@ namespace Project
             {
                 group = listBox1.SelectedItems[0].ToString();
             }
-            oraAdap.SelectCommand.CommandText = "Select * from journal where Substr(DATE_LESSON,4,2) = '" + month + "'";
-
-
-            DataTable data = new DataTable();
-            oraAdap.Fill(data);
-            dataGridView2.DataSource = data;
-            DataGridViewTextBoxColumn dgvAge;
-            dgvAge = new DataGridViewTextBoxColumn();
+            oraAdap.SelectCommand.CommandText = "select STFAM||' '||STNAME||' '||STOT as ФИО, month1 as Устный_ответ_1, month2 as Устный_ответ_2, month3 as Устный_ответ_3, month4 as Реферат from lfk, st_ank1, sp_st_group where lfk.K_ST = st_ank1.K_ST and " +
+                "st_ank1.GROUP_ID = sp_st_group.ID and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and semestr = '" + month+"'";
+            try
+            {
+                DataTable data = new DataTable();
+                oraAdap.Fill(data);
+                dataGridView2.DataSource = data;
+                DataGridViewTextBoxColumn dgvAge;
+                dgvAge = new DataGridViewTextBoxColumn();
+            }
+            catch (SyntaxErrorException)
+            {
+                MessageBox.Show("Упс");
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -117,6 +121,12 @@ namespace Project
             {
                 dataGridView2.ClearSelection();
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            month = comboBox1.Text;
+            Update_Load();
         }
     }
 }
