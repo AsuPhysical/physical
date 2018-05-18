@@ -90,44 +90,44 @@ namespace Project
             DataTable data = new DataTable();
             oraAdap.Fill(data);
             
-            for (int i = 0; i < data.Rows.Count; i++)
-            {
-                for (int j = 0; j < id_stud.Rows.Count; j++)
+                for (int i = 0; i < data.Rows.Count; i++)
                 {
-                    if (data.Rows[i][1].ToString() == id_stud.Rows[j][1].ToString() && data.Rows[i][2].ToString() == comboBox1.Text)
+                    for (int j = 0; j < id_stud.Rows.Count; j++)
                     {
-                        for (int h = 0; h < grid.Rows.Count; h++)
+                        if (data.Rows[i][1].ToString() == id_stud.Rows[j][1].ToString() && data.Rows[i][2].ToString() == comboBox1.Text)
                         {
-                           
-                            if (id_stud.Rows[j][0].ToString() == grid.Rows[h][0].ToString())
+                            for (int h = 0; h < grid.Rows.Count; h++)
                             {
-                                //Console.WriteLine(id_stud.Rows[j][0].ToString() + " " + grid.Rows[h][0].ToString());
-                                data.Rows[i][3] = grid.Rows[h][1];
-                                data.Rows[i][4] = grid.Rows[h][2];
-                                data.Rows[i][5] = grid.Rows[h][3];
-                                data.Rows[i][6] = grid.Rows[h][4];
+
+                                if (id_stud.Rows[j][0].ToString() == grid.Rows[h][0].ToString())
+                                {
+                                    //Console.WriteLine(id_stud.Rows[j][0].ToString() + " " + grid.Rows[h][0].ToString());
+                                    data.Rows[i][3] = grid.Rows[h][1];
+                                    data.Rows[i][4] = grid.Rows[h][2];
+                                    data.Rows[i][5] = grid.Rows[h][3];
+                                    data.Rows[i][6] = grid.Rows[h][4];
+                                }
                             }
                         }
-                        
                     }
                 }
-            }
-            
-            try
-            {
-                OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);
-                oraAdap.Update(data);
-                MessageBox.Show("Данные сохранены");
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка при вводе данных");
-            }
+
+                try
+                {
+                    OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);
+                    oraAdap.Update(data);
+                    MessageBox.Show("Данные сохранены");
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка при вводе данных");
+                }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            oraAdap.SelectCommand.CommandText = "select(TRIM(stfam) || ' ' || TRIM(stname) || ' ' || TRIM(stot)) ФИО, round((month1+month2+month3+month4)/4,0) Балл from lfk, st_ank1, sp_st_group " +
+            oraAdap.SelectCommand.CommandText = "select(TRIM(stfam) || ' ' || TRIM(stname) || ' ' || TRIM(stot)) ФИО, (month1+month2+month3+month4) Балл from lfk, st_ank1, sp_st_group " +
                 "where st_ank1.GROUP_ID = sp_st_group.ID and lfk.k_st = st_ank1.k_st and sp_st_group.TITLE = '" + listBox1.SelectedItem + "'  and semestr = '"+comboBox1.Text+"'";
             DataTable data = new DataTable();
             oraAdap.Fill(data);

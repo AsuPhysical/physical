@@ -169,7 +169,7 @@ namespace Project
         {
             string dat = DateTime.Now.ToString("MM");
             string dat1 = DateTime.Now.ToString("yyyy");
-            oraAdap.SelectCommand.CommandText = "select trunc(avg(vn),0) kk, FIO from (select value_norm vn,STFAM||' '||STNAME||' '||STOT as FIO from journal,st_ank1, " +
+            oraAdap.SelectCommand.CommandText = "select  FIO, trunc(avg(vn),0) as SUM from (select value_norm vn,STFAM||' '||STNAME||' '||STOT as FIO from journal,st_ank1, " +
             "(select dat, dat1, DATE_NORMATIVE dnn, ID_GROUP from(select(EXTRACT(MONTH FROM dd.DATE_NORMATIVE)) dat, " +
             "(EXTRACT(year FROM dd.DATE_NORMATIVE))dat1, DATE_NORMATIVE, ID_GROUP from DATE_NORMATIVe dd, sp_st_group " +
             "where ID_GROUP = sp_st_group.ID and sp_st_group.TITLE = '" + listBox1.SelectedItem + "') where "+ dat + " <= 6 and "+ dat + " >= 1 and "+dat1+" = 2018) ddd " +
@@ -191,34 +191,36 @@ namespace Project
                 "and sp_st_group.TITLE = '"+listBox1.SelectedItem+"' and Substr(DATE_LESSON,4, 5) = '"+month+"'";
             DataTable id_stud = new DataTable();
             oraAdap.Fill(id_stud);
-
-            for (int i = 0; i < data.Rows.Count; i++)
+            try
             {
-                for (int j = 1; j < data.Columns.Count; j++)
+                for (int i = 0; i < data.Rows.Count; i++)
                 {
-                    DataRow newRow = bd.NewRow();
-                    for (int h = 0; h < id_stud.Rows.Count; h++)
+                    for (int j = 1; j < data.Columns.Count; j++)
                     {
-                        if (id_stud.Rows[h][0].ToString() == data.Rows[i][0].ToString())
+                        DataRow newRow = bd.NewRow();
+                        for (int h = 0; h < id_stud.Rows.Count; h++)
                         {
-                            newRow[0] = id_stud.Rows[h][1];
+                            if (id_stud.Rows[h][0].ToString() == data.Rows[i][0].ToString())
+                            {
+                                newRow[0] = id_stud.Rows[h][1];
+                            }
                         }
+                        newRow[1] = data.Columns[j].ColumnName.Substring(0, 10);
+                        if (data.Columns[j].ColumnName.Substring(10) == "\n\rПрисутствие")
+                        {
+                            if (data.Rows[i][j].ToString() == "Б") newRow[3] = "1";
+                            if (data.Rows[i][j].ToString() == "Н") newRow[3] = "0";
+                            newRow[2] = "0";
+                        }
+                        if (data.Columns[j].ColumnName.Substring(10) == "\n\rНорматив")
+                        {
+                            newRow[3] = "1";
+                            newRow[2] = data.Rows[i][j];
+                        }
+                        bd.Rows.Add(newRow);
                     }
-                    newRow[1] = data.Columns[j].ColumnName.Substring(0,10);
-                    if (data.Columns[j].ColumnName.Substring(10) == "\n\rПрисутствие")
-                    {
-                        if(data.Rows[i][j].ToString() == "Б") newRow[3] = "1";
-                        if(data.Rows[i][j].ToString() == "Н") newRow[3] = "0";
-                        newRow[2] = "0";
-                    }  
-                    if (data.Columns[j].ColumnName.Substring(10) == "\n\rНорматив")
-                    {
-                        newRow[3] = "1";
-                        newRow[2] = data.Rows[i][j];
-                    }
-                    bd.Rows.Add(newRow);
                 }
-            }
+           
             
             oraAdap.SelectCommand.CommandText = "select * from journal";
             DataTable journal = new DataTable();
@@ -246,7 +248,13 @@ namespace Project
             {
                 MessageBox.Show("Ошибка при вводе данных");
             }
-            
+
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при выборе данных");
+            }
+
         }
     }
 }

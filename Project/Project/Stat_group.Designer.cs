@@ -81,13 +81,13 @@
             // 
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Location = new System.Drawing.Point(368, 26);
+            this.chart1.Location = new System.Drawing.Point(363, 26);
             this.chart1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(717, 538);
+            this.chart1.Size = new System.Drawing.Size(981, 538);
             this.chart1.TabIndex = 32;
             this.chart1.Text = "chart1";
             this.chart1.GetToolTipText += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs>(this.chart1_GetToolTipText);
@@ -137,8 +137,7 @@
             "1",
             "2",
             "3",
-            "4",
-            "5"});
+            "4"});
             this.comboBox1.Location = new System.Drawing.Point(49, 160);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
@@ -161,7 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1127, 590);
+            this.ClientSize = new System.Drawing.Size(1382, 590);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);

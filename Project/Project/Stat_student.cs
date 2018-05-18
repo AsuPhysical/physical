@@ -16,6 +16,7 @@ namespace Project
         public Stat_student()
         {
             InitializeComponent();
+            chart1.Series[0].LegendText = " ";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);

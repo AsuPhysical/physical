@@ -56,15 +56,15 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            try
-            {
+            if (comboBox2.Text != "" && comboBox1.Text != "")
+            { 
                 string query = "INSERT INTO DATE_NORMATIVE (ID_NORMATIVE, DATE_NORMATIVE, ID_GROUP) values ((Select ID_NORMATIVE from  SP_NORMATIVE where TITLE_NORMATIVE= '" + comboBox1.Text +
-               "'), '" + dateTimePicker1.Text + "' , (select ID from SP_ST_GROUP where TITLE= '" + comboBox2.Text + "'))";
+                "'), '" + dateTimePicker1.Text + "' , (select ID from SP_ST_GROUP where TITLE= '" + comboBox2.Text + "'))";
                 oraAdap.InsertCommand = new OracleCommand(query, ORACLE);
                 oraAdap.InsertCommand.ExecuteNonQuery();
                 MessageBox.Show("Норматив добавлен");
             }
-            catch
+            else
             {
                 MessageBox.Show("Не удалось добавить дату сдачи норматива");
             }
