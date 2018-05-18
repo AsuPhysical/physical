@@ -21,7 +21,6 @@ namespace Project
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
-        string month = "";
 
         private void Load_List()
         {
@@ -65,7 +64,7 @@ namespace Project
                 group = listBox1.SelectedItems[0].ToString();
             }
             oraAdap.SelectCommand.CommandText = "select STFAM||' '||STNAME||' '||STOT as ФИО, month1 as Устный_ответ_1, month2 as Устный_ответ_2, month3 as Устный_ответ_3, month4 as Реферат from lfk, st_ank1, sp_st_group where lfk.K_ST = st_ank1.K_ST and " +
-                "st_ank1.GROUP_ID = sp_st_group.ID and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and semestr = '" + month+"'";
+                "st_ank1.GROUP_ID = sp_st_group.ID and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and semestr = '" + comboBox1.Text + "'";
             try
             {
                 DataTable data = new DataTable();
@@ -78,14 +77,44 @@ namespace Project
             {
                 MessageBox.Show("Упс");
             }
-            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            DataTable grid = dataGridView2.DataSource as DataTable;
+            oraAdap.SelectCommand.CommandText = "select STFAM||' '||STNAME||' '||STOT as FIO, lfk.k_st, SEMESTR, month1,month2,month3, month4  from st_ank1, lfk where st_ank1.K_ST = lfk.K_ST";
+            DataTable id_stud = new DataTable();
+            oraAdap.Fill(id_stud);
+
+            oraAdap.SelectCommand.CommandText = "select * from lfk";
+            DataTable data = new DataTable();
+            oraAdap.Fill(data);
+            
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                for (int j = 0; j < id_stud.Rows.Count; j++)
+                {
+                    if (data.Rows[i][1].ToString() == id_stud.Rows[j][1].ToString() && data.Rows[i][2].ToString() == comboBox1.Text)
+                    {
+                        for (int h = 0; h < grid.Rows.Count; h++)
+                        {
+                           
+                            if (id_stud.Rows[j][0].ToString() == grid.Rows[h][0].ToString())
+                            {
+                                //Console.WriteLine(id_stud.Rows[j][0].ToString() + " " + grid.Rows[h][0].ToString());
+                                data.Rows[i][3] = grid.Rows[h][1];
+                                data.Rows[i][4] = grid.Rows[h][2];
+                                data.Rows[i][5] = grid.Rows[h][3];
+                                data.Rows[i][6] = grid.Rows[h][4];
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            
             try
             {
-                DataTable data = dataGridView2.DataSource as DataTable;
                 OracleCommandBuilder builder = new OracleCommandBuilder(oraAdap);
                 oraAdap.Update(data);
                 MessageBox.Show("Данные сохранены");
@@ -98,7 +127,11 @@ namespace Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            oraAdap.SelectCommand.CommandText = "select(TRIM(stfam) || ' ' || TRIM(stname) || ' ' || TRIM(stot)) ФИО, round((month1+month2+month3+month4)/4,0) Балл from lfk, st_ank1, sp_st_group " +
+                "where st_ank1.GROUP_ID = sp_st_group.ID and lfk.k_st = st_ank1.k_st and sp_st_group.TITLE = '" + listBox1.SelectedItem + "'  and semestr = '"+comboBox1.Text+"'";
+            DataTable data = new DataTable();
+            oraAdap.Fill(data);
+            dataGridView2.DataSource = data;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -125,7 +158,6 @@ namespace Project
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            month = comboBox1.Text;
             Update_Load();
         }
     }

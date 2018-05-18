@@ -166,7 +166,14 @@ namespace Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            oraAdap.SelectCommand.CommandText = "select trunc(avg(vn),0) kk, FIO from (select value_norm vn,STFAM||' '||STNAME||' '||STOT as FIO from journal,st_ank1, "+
+                "(select dat, dat1, DATE_NORMATIVE dnn, ID_GROUP from(select(EXTRACT(MONTH FROM dd.DATE_NORMATIVE)) dat, "+
+                "(EXTRACT(year FROM dd.DATE_NORMATIVE))dat1, DATE_NORMATIVE, ID_GROUP from DATE_NORMATIVe dd, sp_st_group "+
+                "where ID_GROUP = sp_st_group.ID and sp_st_group.TITLE = '"+listBox1.SelectedItem+"') where dat <= 6 and dat >= 1 and dat1 = 2018) ddd "+
+                "where DATE_lesson = dnn and st_ank1.k_st = journal.id_student and st_ank1.group_id = ddd.id_group) group by FIO";
+            DataTable data = new DataTable();
+            oraAdap.Fill(data);
+            dataGridView2.DataSource = data;
         }
 
         private void button2_Click(object sender, EventArgs e)

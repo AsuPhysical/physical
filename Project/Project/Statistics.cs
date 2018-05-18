@@ -53,7 +53,14 @@ namespace Project
             OracleDataReader odr = oc.ExecuteReader();
             while (odr.Read())
             {
-                arrX.Add(odr.GetInt32(0));
+                try
+                {
+                    arrX.Add(odr.GetInt32(0));
+                }
+                catch (InvalidCastException)
+                {
+                    arrX.Add(0);
+                }
             }
 
             oc = new OracleCommand(stat2, ORACLE);

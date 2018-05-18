@@ -16,7 +16,6 @@ namespace Project
         public Stat_student()
         {
             InitializeComponent();
-            Class1.Teachr_fio = "Могутов Мир Платонович";
         }
 
         OracleConnection ORACLE = new OracleConnection(constr);
@@ -30,14 +29,13 @@ namespace Project
 
             List<double> arrX = new List<double>();
             List<string> arrY = new List<string>();
+            
 
-            //// Статистика по определенному нормативу, за определенный год ВСЕХ ИЛИ Одной группы
-
-            string stat1 = "select value_norm from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE"+
+            string stat1 = "select distinct value_norm, journal.date_lesson  from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE" +
             " and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and"+
             " SP_NORMATIVE.TITLE_NORMATIVE = '"+comboBox3.Text+"' and st_ank1.STFAM || ' ' || STNAME || ' ' || STOT = '"+comboBox1.Text+"'";
 
-            string stat2 = "select journal.date_lesson from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE" +
+            string stat2 = "select distinct journal.date_lesson from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE" +
             " and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and" +
             " SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and st_ank1.STFAM || ' ' || STNAME || ' ' || STOT = '" + comboBox1.Text + "'"; 
 
@@ -45,10 +43,16 @@ namespace Project
 
             OracleCommand oc = new OracleCommand(stat1, ORACLE);
             OracleDataReader odr = oc.ExecuteReader();
-            //MessageBox.Show(odr.GetInt32(0).ToString);
             while (odr.Read())
             {
-                arrX.Add(odr.GetInt32(0));
+                try
+                {
+                    arrX.Add(odr.GetInt32(0));
+                }
+                catch (InvalidCastException)
+                {
+                    //arrX.Add(0);
+                }
             }
 
             oc = new OracleCommand(stat2, ORACLE);
@@ -57,7 +61,7 @@ namespace Project
             {
                 arrY.Add(odr.GetDateTime(0).ToShortDateString());
             }
-
+            chart1.ChartAreas[0].AxisX.Interval = 1;
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
         }
 

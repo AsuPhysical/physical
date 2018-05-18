@@ -19,10 +19,6 @@ namespace Project
         public login()
         {
             InitializeComponent();
-            {
-
-                //MessageBox.Show(Class1.Teachr_fio);
-            }
 
         }
         OracleConnection ORACLE = new OracleConnection(constr);
@@ -52,7 +48,7 @@ namespace Project
                 {
                     (new Menu()).Show();
                     this.Hide();
-                    Class1.Teachr_fio = textBox.Text;
+                    Class1.Teachr_fio = textBox.Text.Trim();
                     ORACLE.Close();
                 }
                 else { MessageBox.Show("Неверно ввели данные"); }
