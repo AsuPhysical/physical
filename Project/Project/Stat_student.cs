@@ -29,23 +29,30 @@ namespace Project
 
             List<double> arrX = new List<double>();
             List<string> arrY = new List<string>();
+            
 
-            //// Статистика по определенному нормативу, за определенный год ВСЕХ ИЛИ Одной группы
-
-            string stat1 = "select value_norm from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE"+
+            string stat1 = "select distinct value_norm, journal.date_lesson  from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE" +
             " and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and"+
             " SP_NORMATIVE.TITLE_NORMATIVE = '"+comboBox3.Text+"' and st_ank1.STFAM || ' ' || STNAME || ' ' || STOT = '"+comboBox1.Text+"'";
 
-            string stat2 = "select journal.date_lesson from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE" +
+            string stat2 = "select distinct journal.date_lesson from journal, date_normative, SP_NORMATIVE, st_ank1 where journal.DATE_LESSON = date_normative.DATE_NORMATIVE" +
             " and date_normative.ID_NORMATIVE = SP_NORMATIVE.ID_NORMATIVE and st_ank1.K_ST = journal.ID_STUDENT and" +
             " SP_NORMATIVE.TITLE_NORMATIVE = '" + comboBox3.Text + "' and st_ank1.STFAM || ' ' || STNAME || ' ' || STOT = '" + comboBox1.Text + "'"; 
 
+
+
             OracleCommand oc = new OracleCommand(stat1, ORACLE);
             OracleDataReader odr = oc.ExecuteReader();
-
             while (odr.Read())
             {
-                arrX.Add(odr.GetInt32(0));
+                try
+                {
+                    arrX.Add(odr.GetInt32(0));
+                }
+                catch (InvalidCastException)
+                {
+                    //arrX.Add(0);
+                }
             }
 
             oc = new OracleCommand(stat2, ORACLE);
@@ -54,7 +61,7 @@ namespace Project
             {
                 arrY.Add(odr.GetDateTime(0).ToShortDateString());
             }
-
+            chart1.ChartAreas[0].AxisX.Interval = 1;
             chart1.Series[0].Points.DataBindXY(arrY, arrX);
         }
 
@@ -68,7 +75,7 @@ namespace Project
         {
             ORACLE.Open();
             oraAdap.SelectCommand = new OracleCommand();
-            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio.Trim() + "'";
+            oraAdap.SelectCommand.CommandText = "select SP_ST_GROUP.TITLE from TEACH_GROUP, SP_TEACHERS, SP_ST_GROUP where SP_ST_GROUP.ID=TEACH_GROUP.ID_GROUP and SP_TEACHERS.ID_TEACHER=TEACH_GROUP.ID_TEACH and TRIM(SP_TEACHERS.FIO) ='" + Class1.Teachr_fio + "'";
             oraAdap.SelectCommand.Connection = ORACLE;
             OracleDataReader oraReader = oraAdap.SelectCommand.ExecuteReader();
             while (oraReader.Read())

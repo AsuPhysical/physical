@@ -24,7 +24,7 @@ namespace Project
         OracleConnection ORACLE = new OracleConnection(constr);
         static string constr = "User Id=PHYSICAL_PROJECT; Password=1111;Data Source=127.0.0.1:1521/xe";
         OracleDataAdapter oraAdap = new OracleDataAdapter();
-        string month = DateTime.Now.ToString("MM");
+        string month = DateTime.Now.ToString("MM/yy");//.Replace('/','.');
 
         private void Load_List()
         {
@@ -69,25 +69,25 @@ namespace Project
             {
                 group = listBox1.SelectedItems[0].ToString();
             }
+            oraAdap.SelectCommand.CommandText = "Select distinct date_lesson from journal, sp_st_group, st_ank1 where st_ank1.K_ST = journal.ID_STUDENT and st_ank1.GROUP_ID = sp_st_group.ID " +
+                "and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and Substr(DATE_LESSON,4, 5) = '" + month + "'";
+            DataTable date_lesson = new DataTable();
+            oraAdap.Fill(date_lesson);
+            if (date_lesson.Rows.Count == 0) return;
 
             oraAdap.SelectCommand.CommandText = "Select STFAM||' '||STNAME||' '||STOT as FIO, date_lesson, value_norm, attendance from journal, sp_st_group, st_ank1 where st_ank1.K_ST = journal.ID_STUDENT " +
-                " and st_ank1.GROUP_ID = sp_st_group.ID and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and Substr(DATE_LESSON,4, 2) = '" + month + "' order by FIO";
+                " and st_ank1.GROUP_ID = sp_st_group.ID and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and Substr(DATE_LESSON,4, 5) = '" + month + "' order by FIO";
             DataTable journal = new DataTable();
             oraAdap.Fill(journal);
 
             oraAdap.SelectCommand.CommandText = "select DATE_NORMATIVE from date_normative";
             DataTable normative = new DataTable();
             oraAdap.Fill(normative);
-
-            oraAdap.SelectCommand.CommandText = "Select distinct date_lesson from journal, sp_st_group, st_ank1 where st_ank1.K_ST = journal.ID_STUDENT and st_ank1.GROUP_ID = sp_st_group.ID " +
-                "and sp_st_group.TITLE = '" + listBox1.SelectedItem + "' and Substr(DATE_LESSON,4, 2) = '" + month + "'";
-            DataTable date_lesson = new DataTable();
-            oraAdap.Fill(date_lesson);
-
+            
             DataTable grid = new DataTable();
             grid.Columns.Add("ФИО");
 
-            if(date_lesson.Rows.Count==0) return;
+            
             for (int i = 0; i < date_lesson.Rows.Count; i++)
             {
                 string flag = "\n\rПрисутствие";
@@ -116,7 +116,8 @@ namespace Project
                         }
                         else if (journal.Rows[j][1].ToString().Substring(0, 10).ToString() == grid.Columns[h].ColumnName.Substring(0, 10).ToString() && grid.Columns[h].ColumnName.Substring(10) == "\n\rНорматив" && newRow[0].ToString() == journal.Rows[j][0].ToString())
                         {
-                            newRow[h] = journal.Rows[j][2];
+                            if(journal.Rows[j][2]==null) newRow[h] = 0;
+                            else newRow[h] = journal.Rows[j][2];
                         }
                     }
                 }
@@ -160,13 +161,22 @@ namespace Project
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            month = Convert.ToDateTime(comboBox1.Text + "/01/2000").ToString("MM");
+            month = Convert.ToDateTime(comboBox1.Text + "/01/"+DateTime.Now.ToString("yy")).ToString("MM/yy");
             Update_Load();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            string dat = DateTime.Now.ToString("MM");
+            string dat1 = DateTime.Now.ToString("yyyy");
+            oraAdap.SelectCommand.CommandText = "select trunc(avg(vn),0) kk, FIO from (select value_norm vn,STFAM||' '||STNAME||' '||STOT as FIO from journal,st_ank1, " +
+            "(select dat, dat1, DATE_NORMATIVE dnn, ID_GROUP from(select(EXTRACT(MONTH FROM dd.DATE_NORMATIVE)) dat, " +
+            "(EXTRACT(year FROM dd.DATE_NORMATIVE))dat1, DATE_NORMATIVE, ID_GROUP from DATE_NORMATIVe dd, sp_st_group " +
+            "where ID_GROUP = sp_st_group.ID and sp_st_group.TITLE = '" + listBox1.SelectedItem + "') where "+ dat + " <= 6 and "+ dat + " >= 1 and "+dat1+" = 2018) ddd " +
+            "where DATE_lesson = dnn and st_ank1.k_st = journal.id_student and st_ank1.group_id = ddd.id_group) group by FIO";
+            DataTable data = new DataTable();
+            oraAdap.Fill(data);
+            dataGridView2.DataSource = data;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -178,7 +188,7 @@ namespace Project
             bd.Columns.Add("VALUE_NORM");
             bd.Columns.Add("ATTENDANCE");
             oraAdap.SelectCommand.CommandText = "Select distinct STFAM||' '||STNAME||' '||STOT as FIO, k_st from journal, sp_st_group, st_ank1 where st_ank1.K_ST = journal.ID_STUDENT and st_ank1.GROUP_ID = sp_st_group.ID " +
-                "and sp_st_group.TITLE = '"+listBox1.SelectedItem+"' and Substr(DATE_LESSON,4, 2) = '"+month+"'";
+                "and sp_st_group.TITLE = '"+listBox1.SelectedItem+"' and Substr(DATE_LESSON,4, 5) = '"+month+"'";
             DataTable id_stud = new DataTable();
             oraAdap.Fill(id_stud);
 
